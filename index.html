@@ -3,146 +3,441 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Parsa Faramarzi | AI Developer & Data Scientist</title>
-    <link rel="stylesheet" href="./styles/style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    />
+
     <link
       rel="shortcut icon"
-      href="./images/PF Logo 2 - Small.png"
+      href="./assets/img/PF Logo 2 - Small.png"
       type="image/x-icon"
     />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.0.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="./assets/css/style.css" />
+
+    <title>Parsa Faramarzi | AI Developer & Data Scientist</title>
   </head>
   <body>
-    <header class="hero">
-      <div class="container">
-        <div class="hero-content">
-          <img
-            src="./images/Portrait.png"
-            alt="Parsa Faramarzi"
-            class="profile-img"
-          />
-          <h1>Parsa Faramarzi</h1>
-          <p class="tagline">AI Developer & Data Scientist</p>
+    <header class="header" id="header">
+      <nav class="nav container">
+        <div class="nav__menu" id="nav-menu">
+          <ul class="nav__list">
+            <li class="nav__item">
+              <a href="#home" class="nav__link active-link">
+                <i class="ri-home-5-line"></i>
+                <span class="nav__name">Home</span>
+              </a>
+            </li>
 
-          <div class="hero-actions">
-            <a
-              href="https://www.linkedin.com/in/parsafaramarzi/"
-              class="btn btn-primary"
-              target="_blank"
-            >
-              <i class="fab fa-linkedin"></i> LinkedIn
-            </a>
-            <a
-              href="https://github.com/parsafaramarzi"
-              class="btn btn-secondary"
-              target="_blank"
-            >
-              <i class="fab fa-github"></i> GitHub
-            </a>
-            <a href="#about" class="btn btn-outline">About</a>
-          </div>
+            <li class="nav__item">
+              <a href="#about" class="nav__link">
+                <i class="ri-user-3-line"></i>
+                <span class="nav__name">About</span>
+              </a>
+            </li>
+
+            <li class="nav__item">
+              <a href="#skills" class="nav__link">
+                <i class="ri-book-3-line"></i>
+                <span class="nav__name">Skills</span>
+              </a>
+            </li>
+
+            <li class="nav__item">
+              <a href="#projects" class="nav__link">
+                <i class="ri-image-line"></i>
+                <span class="nav__name">Projects</span>
+              </a>
+            </li>
+
+            <li class="nav__item">
+              <a href="#contact" class="nav__link">
+                <i class="ri-chat-3-line"></i>
+                <span class="nav__name">Contact</span>
+              </a>
+            </li>
+          </ul>
         </div>
-      </div>
+      </nav>
     </header>
 
-    <section id="about" class="section">
-      <div class="container">
-        <h2>About Me</h2>
-        <div class="about-text">
-          <p>
-            I am an AI developer and ML/DL specialist with a focus on computer
-            vision. Currently training as an ML specialist, I have built systems
-            for pose estimation, license plate recognition, and medical imaging
-            analysis.
-          </p>
-        </div>
-      </div>
-    </section>
+    <main class="main">
+      <section class="home section" id="home">
+        <div class="home__container container grid">
+          <div class="home__data">
+            <span class="home__greeting">Hello, I'm</span>
+            <h1 class="home__name">Parsa Faramarzi</h1>
+            <h3 class="home__education">AI Developer & Data Scientist</h3>
 
-    <section id="projects" class="section bg-alt">
-      <div class="container">
-        <h2>Featured Projects</h2>
-        <div class="project-grid">
-          <div class="card">
-            <div
-              class="card-img"
-              style="background-image: url(&quot;img/project1.jpg&quot;)"
-            ></div>
-            <div class="card-body">
-              <h3>ALPR System</h3>
-              <p>
-                Real-time vehicle and license plate detection using YOLOv11 and
-                OCR.
-              </p>
+            <div class="home__buttons">
+              <a href="#" class="button" download>Download CV</a>
+              <a href="#contact" class="button button--ghost">Contact Me</a>
             </div>
           </div>
-          <div class="card">
-            <div
-              class="card-img"
-              style="background-image: url(&quot;img/project2.jpg&quot;)"
-            ></div>
-            <div class="card-body">
-              <h3>Pose Estimation</h3>
-              <p>
-                Human movement analysis and joint angle calculation using
-                Computer Vision.
-              </p>
+
+          <div class="home__handle">
+            <img src="./assets/img/blob.svg" alt="" class="home__hexagon" />
+            <img
+              src="./assets/img/portrait02.png"
+              alt="Parsa Faramarzi"
+              class="home__img"
+            />
+          </div>
+
+          <div class="home__social">
+            <a
+              href="https://github.com/parsafaramarzi"
+              target="_blank"
+              class="home__social-link"
+            >
+              <i class="ri-github-fill"></i>
+            </a>
+
+            <a
+              href="https://www.linkedin.com/in/parsafaramarzi/"
+              target="_blank"
+              class="home__social-link"
+            >
+              <i class="ri-linkedin-box-fill"></i>
+            </a>
+
+            <button
+              class="home__social-link"
+              onclick="copyEmail(this)"
+              title="Copy Email"
+            >
+              <i class="ri-mail-line"></i>
+              <span class="email-address" style="display: none"
+                >pfaramazi@gmail.com</span
+              >
+            </button>
+          </div>
+
+          <a href="#about" class="home__scroll">
+            <i class="ri-arrow-down-line"></i>
+            <span class="home__scroll-name">Scroll Down</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="about section" id="about">
+        <span class="section__subtitle">My Intro</span>
+        <h2 class="section__title">About Me</h2>
+
+        <div class="about__container container grid">
+          <img
+            src="./assets/img/PF Logo 2.png"
+            alt="Parsa Faramarzi Logo"
+            class="about__img"
+          />
+
+          <div class="about__data">
+            <div class="about__info">
+              <div class="about__box">
+                <i class="ri-award-line about__icon"></i>
+                <h3 class="about__title">Experience</h3>
+                <span class="about__subtitle">5+ Years</span>
+              </div>
+
+              <div class="about__box">
+                <i class="ri-briefcase-3-line about__icon"></i>
+                <h3 class="about__title">Projects</h3>
+                <span class="about__subtitle">30+ Completed</span>
+              </div>
+
+              <div class="about__box">
+                <i class="ri-microscope-line about__icon"></i>
+                <h3 class="about__title">Research</h3>
+                <span class="about__subtitle">AI & Robotics</span>
+              </div>
+            </div>
+
+            <p class="about__description">
+              Passionate AI developer specializing in Deep Learning, Computer
+              Vision, and intelligent automation systems. Experienced in
+              building real-time AI solutions using YOLO, PyTorch, TensorFlow,
+              and OpenCV.
+            </p>
+
+            <a href="#contact" class="button">Contact Me</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="skills section" id="skills">
+        <span class="section__subtitle">My Abilities</span>
+        <h2 class="section__title">My Experience</h2>
+
+        <div class="skills__container container grid">
+          <div class="skills__content">
+            <h3 class="skills__title">AI & Machine Learning</h3>
+
+            <div class="skills__box">
+              <div class="skills__group">
+                <div class="skills__data">
+                  <i class="ri-checkbox-circle-line"></i>
+                  <div>
+                    <h3 class="skills__name">PyTorch</h3>
+                    <span class="skills__level">Advanced</span>
+                  </div>
+                </div>
+                <div class="skills__data">
+                  <i class="ri-checkbox-circle-line"></i>
+                  <div>
+                    <h3 class="skills__name">TensorFlow</h3>
+                    <span class="skills__level">Advanced</span>
+                  </div>
+                </div>
+                <div class="skills__data">
+                  <i class="ri-checkbox-circle-line"></i>
+                  <div>
+                    <h3 class="skills__name">OpenCV</h3>
+                    <span class="skills__level">Advanced</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="skills__group">
+                <div class="skills__data">
+                  <i class="ri-checkbox-circle-line"></i>
+                  <div>
+                    <h3 class="skills__name">YOLO</h3>
+                    <span class="skills__level">Expert</span>
+                  </div>
+                </div>
+                <div class="skills__data">
+                  <i class="ri-checkbox-circle-line"></i>
+                  <div>
+                    <h3 class="skills__name">Python</h3>
+                    <span class="skills__level">Expert</span>
+                  </div>
+                </div>
+                <div class="skills__data">
+                  <i class="ri-checkbox-circle-line"></i>
+                  <div>
+                    <h3 class="skills__name">Data Science</h3>
+                    <span class="skills__level">Advanced</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="skills" class="section">
-      <div class="container">
-        <h2>Skills Stack</h2>
-        <div class="skills-grid">
-          <img
-            src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white"
-            alt="Python"
-          />
-          <img
-            src="https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white"
-            alt="PyTorch"
-          />
-          <img
-            src="https://img.shields.io/badge/OpenCV-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white"
-            alt="OpenCV"
-          />
-          <img
-            src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black"
-            alt="Linux"
-          />
-          <img
-            src="https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white"
-            alt="Pandas"
-          />
-        </div>
-      </div>
-    </section>
+      <section class="services section" id="services">
+        <span class="section__subtitle">My Services</span>
+        <h2 class="section__title">What I Offer</h2>
 
-    <section id="education" class="section bg-alt">
-      <div class="container">
-        <h2>Education</h2>
-        <div class="edu-card">
-          <h4>M.Sc. in Artificial Intelligence</h4>
-          <p>BTU Cottbus-Senftenberg | 2025 - Present</p>
-        </div>
-        <div class="edu-card">
-          <h4>Secondary Education</h4>
-          <p>Pre-University Degree | Mathematics & Physics</p>
-        </div>
-      </div>
-    </section>
+        <div class="services__container container grid">
+          <div class="services__card">
+            <h3 class="services__title">Computer Vision</h3>
+            <span class="services__button">
+              See More <i class="ri-arrow-right-line"></i>
+            </span>
+          </div>
 
-    <footer>
-      <div class="container">
-        <p>Built with <span class="heart">&hearts;</span> by Parsa Faramarzi</p>
-        <p>&copy; 2026 | Iran - Germany</p>
+          <div class="services__card">
+            <h3 class="services__title">Deep Learning</h3>
+            <span class="services__button">
+              See More <i class="ri-arrow-right-line"></i>
+            </span>
+          </div>
+
+          <div class="services__card">
+            <h3 class="services__title">Backend Development</h3>
+            <span class="services__button">
+              See More <i class="ri-arrow-right-line"></i>
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <section class="projects section" id="projects">
+        <span class="section__subtitle">My Portfolio</span>
+        <h2 class="section__title">Some of My Projects</h2>
+
+        <div class="projects__container container grid">
+          <div class="projects__card">
+            <img
+              src="https://github.com/parsafaramarzi/YOLO-OCR-Car-Plate-Reader/blob/main/output/demo_frame01.jpg?raw=true"
+              alt="Turkish License Plate Project"
+              class="projects__img"
+            />
+            <h3 class="projects__title">
+              YOLO-OCR Turkish License Plate Counter and Tracker
+            </h3>
+            <a
+              href="https://github.com/parsafaramarzi/YOLO-OCR-Car-Plate-Reader"
+              class="projects__button"
+              target="_blank"
+            >
+              View Project <i class="ri-arrow-right-line"></i>
+            </a>
+          </div>
+
+          <div class="projects__card">
+            <img
+              src="https://github.com/parsafaramarzi/YOLO-Amputee-Detection/blob/main/output/demo_frame03.jpg?raw=true"
+              alt="YOLOv11 Pose Detector"
+              class="projects__img"
+            />
+            <h3 class="projects__title">
+              YOLOv11 Pose Integrity & Status Detector
+            </h3>
+            <a
+              href="https://github.com/parsafaramarzi/YOLO-Amputee-Detection"
+              class="projects__button"
+              target="_blank"
+            >
+              View Project <i class="ri-arrow-right-line"></i>
+            </a>
+          </div>
+
+          <div class="projects__card">
+            <img
+              src="https://github.com/parsafaramarzi/YOLO-Falling-Detection/raw/main/output/demo_frame01.jpg"
+              alt="Fall Detection Project"
+              class="projects__img"
+            />
+            <h3 class="projects__title">
+              Real-Time Human Pose Estimation and Fall Detection
+            </h3>
+            <a
+              href="https://github.com/parsafaramarzi/YOLO-Falling-Detection"
+              class="projects__button"
+              target="_blank"
+            >
+              View Project <i class="ri-arrow-right-line"></i>
+            </a>
+          </div>
+
+          <div class="projects__card">
+            <img
+              src="https://github.com/parsafaramarzi/YOLO-MovementType-Detection/blob/main/output/demo_frame01.jpg?raw=true"
+              alt="Movement Classification Project"
+              class="projects__img"
+            />
+            <h3 class="projects__title">
+              Real-Time Movement Classification (Running/Non-Running)
+            </h3>
+            <a
+              href="https://github.com/parsafaramarzi/YOLO-MovementType-Detection"
+              class="projects__button"
+              target="_blank"
+            >
+              View Project <i class="ri-arrow-right-line"></i>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact section" id="contact">
+        <span class="section__subtitle">Get In Touch</span>
+        <h2 class="section__title">Contact Me</h2>
+
+        <div class="contact__container container grid">
+          <div class="contact__content">
+            <h3 class="contact__title">My Email</h3>
+            <div class="contact__card" onclick="copyEmail(this)">
+              <button class="contact__social-link" title="Click to Copy">
+                <i class="ri-mail-line"></i>
+                <span class="email-address">pfaramazi@gmail.com</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="contact__content">
+            <h3 class="contact__title">Write to Me</h3>
+            <form action="" class="contact__form">
+              <div class="contact__form-div">
+                <label class="contact__form-tag">Name</label>
+                <input
+                  type="text"
+                  name="user_name"
+                  placeholder="Insert your name"
+                  class="contact__form-input"
+                  required
+                />
+              </div>
+
+              <div class="contact__form-div">
+                <label class="contact__form-tag">Mail</label>
+                <input
+                  type="email"
+                  name="user_email"
+                  placeholder="Insert your email"
+                  class="contact__form-input"
+                  required
+                />
+              </div>
+
+              <div class="contact__form-div contact__form-area">
+                <label class="contact__form-tag">Your Message</label>
+                <textarea
+                  name="user_message"
+                  placeholder="Write your text"
+                  class="contact__form-input contact__form-input-text"
+                  required
+                ></textarea>
+              </div>
+
+              <button type="submit" class="button">Send Message</button>
+            </form>
+          </div>
+        </div>
+        <a href="#" class="scrollup" id="scroll-up">
+          <i class="ri-arrow-up-line"></i>
+        </a>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer__container container">
+        <h1 class="footer__title">Parsa</h1>
+
+        <ul class="footer__list">
+          <li><a href="#about" class="footer__link">About</a></li>
+          <li><a href="#projects" class="footer__link">Projects</a></li>
+          <li><a href="#contact" class="footer__link">Contact</a></li>
+        </ul>
+
+        <ul class="footer__social">
+          <a
+            href="https://github.com/parsafaramarzi"
+            class="footer__social-link"
+            target="_blank"
+          >
+            <i class="ri-github-line"></i>
+          </a>
+          <a
+            href="https://www.linkedin.com/in/parsafaramarzi/"
+            class="footer__social-link"
+            target="_blank"
+          >
+            <i class="ri-linkedin-box-line"></i>
+          </a>
+          <button
+            class="footer__social-link"
+            onclick="copyEmail(this)"
+            title="Click to Copy"
+          >
+            <i class="ri-mail-line"></i>
+            <span class="email-address" style="display: none"
+              >pfaramazi@gmail.com</span
+            >
+          </button>
+        </ul>
+
+        <span class="footer__copy">
+          &#169; Parsa Faramarzi. All rights reserved
+        </span>
       </div>
     </footer>
+
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="assets/js/main.js"></script>
   </body>
 </html>
