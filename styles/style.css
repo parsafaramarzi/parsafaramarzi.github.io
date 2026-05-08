@@ -1,0 +1,215 @@
+/* FONTS */
+@font-face {
+  font-family: ProximaNova-R;
+  src: url(../fonts/Proxima\ Nova\ Regular.ttf);
+}
+@font-face {
+  font-family: ProximaNova-EB;
+  src: url(../fonts/Proxima\ Nova\ Extrabold.ttf);
+}
+@font-face {
+  font-family: ProximaNova-B;
+  src: url(../fonts/Proxima\ Nova\ Semibold.ttf);
+}
+@font-face {
+  font-family: ProximaNova-L;
+  src: url(../fonts/Proxima\ Nova\ Light.ttf);
+}
+@font-face {
+  font-family: Gotham;
+  src: url(../fonts/Gotham\ Medium.otf);
+}
+
+:root {
+  /* BACKGROUNDS */
+  --bg-primary-deep: #1a334a;
+  --bg-secondary-mid: #1e536e;
+
+  /* ACCENTS */
+  --accent-primary-teal: #18a3b7;
+  --accent-action-cyan: #27e6ec;
+  --color-mid-blue: #5aa5cd;
+  --color-support-lavender: #6f71a1;
+
+  /* THEME LOGIC */
+  --theme-bg: var(--bg-primary-deep);
+  --theme-text-main: #ffffff;
+  --theme-text-muted: var(--color-mid-blue);
+  --theme-link: var(--accent-primary-teal);
+  --theme-link-hover: var(--accent-action-cyan);
+}
+
+/* RESET & BASE */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--theme-bg);
+  color: var(--theme-text-main);
+  font-family: ProximaNova-R, sans-serif;
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3 {
+  font-family: ProximaNova-EB, sans-serif;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.section {
+  padding: 100px 0;
+}
+
+.bg-alt {
+  background-color: var(--bg-secondary-mid);
+}
+
+h2 {
+  font-size: 2.5rem;
+  margin-bottom: 50px;
+  text-align: center;
+  color: var(--accent-action-cyan);
+}
+
+/* HERO SECTION */
+.hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: radial-gradient(
+    circle at center,
+    var(--bg-secondary-mid) 0%,
+    var(--bg-primary-deep) 100%
+  );
+}
+
+.profile-img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 4px solid var(--accent-primary-teal);
+  margin-bottom: 25px;
+  object-fit: cover;
+}
+
+.tagline {
+  font-family: Gotham, sans-serif;
+  font-size: 1.3rem;
+  color: var(--theme-text-muted);
+  margin-bottom: 40px;
+}
+
+/* BUTTONS */
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 12px 30px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-family: ProximaNova-B;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background: var(--accent-primary-teal);
+  color: white;
+}
+.btn-secondary {
+  background: #00000044;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.btn-outline {
+  border: 2px solid var(--accent-action-cyan);
+  color: var(--accent-action-cyan);
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  filter: brightness(1.1);
+}
+
+/* PROJECT CARDS */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+}
+
+.card {
+  background: var(--bg-primary-deep);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.02);
+  border-color: var(--accent-action-cyan);
+}
+
+.card-img {
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+}
+
+.card-body {
+  padding: 25px;
+}
+
+.card-body h3 {
+  color: var(--accent-primary-teal);
+  margin-bottom: 10px;
+}
+
+/* SKILLS BADGES */
+.skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+/* EDUCATION */
+.edu-card {
+  padding: 25px;
+  border-left: 4px solid var(--accent-primary-teal);
+  margin-bottom: 20px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* FOOTER */
+footer {
+  padding: 60px 0;
+  text-align: center;
+  background: #0d1a26;
+  border-top: 1px solid var(--bg-secondary-mid);
+}
+
+.heart {
+  color: var(--accent-action-cyan);
+}
