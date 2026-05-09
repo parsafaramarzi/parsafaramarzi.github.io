@@ -99,5 +99,5 @@ sr.reveal(
 );
 sr.reveal(`.home__handle`, { origin: "bottom" });
 sr.reveal(`.about__img, .skills__content`, { origin: "left" });
-sr.reveal(`.about__data, .services__card`, { origin: "right" });
+sr.reveal(`.about__data`, { origin: "right" });
 sr.reveal(`.projects__card`, { interval: 100 });
