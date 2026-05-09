@@ -143,11 +143,13 @@ img {
   top: 0;
   left: 0;
   width: 100%;
+  height: 80px;
   background-color: transparent; /* Transparent at the very top */
   z-index: var(--z-fixed);
   transition:
     background-color 0.4s,
     backdrop-filter 0.4s; /* Smooth transition */
+  pointer-events: none; /* Allow clicks to pass through when transparent */
 }
 
 /*=============== BLUR HEADER ===============*/
@@ -164,6 +166,21 @@ img {
   display: flex;
   justify-content: center; /* Centers the menu horizontally */
   align-items: center;
+}
+
+.nav__menu {
+  /* Desktop: position fixed at top with header, centered */
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+  z-index: var(--z-fixed);
+  pointer-events: auto;
 }
 
 .nav__list {
@@ -819,9 +836,11 @@ img {
     position: fixed;
     bottom: 1.2rem;
     left: 50%;
+    top: auto; /* Remove top positioning for mobile */
     transform: translateX(-50%);
-    background-color: var(--container-color-light);
     width: auto;
+    height: auto;
+    background-color: var(--container-color-light);
     padding: 0.6rem 1.5rem;
     border-radius: 4rem;
     backdrop-filter: blur(10px);
