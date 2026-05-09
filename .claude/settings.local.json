@@ -2,7 +2,10 @@
   "permissions": {
     "allow": [
       "Bash(git add *)",
-      "Bash(git commit -m ' *)"
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(gh pr create --repo parsafaramarzi/parsafaramarzi.github.io --head claude/trusting-kalam-75fd7b --base main --title 'Mobile navbar improvements & narrow device support' --body ' *)",
+      "PowerShell(git -C \"E:\\\\Parsa\\\\Projects\\\\Programming\\\\PF Portfolio Website\\\\.claude\\\\worktrees\\\\trusting-kalam-75fd7b\" remote get-url origin)"
     ]
   }
 }
