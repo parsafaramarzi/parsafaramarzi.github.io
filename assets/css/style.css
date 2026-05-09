@@ -1,7 +1,7 @@
-/*=============== GOOGLE FONTS ===============*/
+/* ==================== IMPORTS & GOOGLE FONTS ==================== */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 
-/*=============== VARIABLES ===============*/
+/* ==================== ROOT VARIABLES & THEME ==================== */
 :root {
   --hue: 158;
   --first-color: hsl(var(--hue), 85%, 52%);
@@ -29,7 +29,7 @@
   --z-fixed: 100;
 }
 
-/*=============== COPY NOTIFICATION ===============*/
+/* ==================== COPY NOTIFICATION (Toast) ==================== */
 .copy-notification {
   position: fixed;
   bottom: 5rem;
@@ -67,7 +67,7 @@
   }
 }
 
-/*=============== BASE ===============*/
+/* ==================== BASE & GLOBAL STYLES ==================== */
 * {
   margin: 0;
   padding: 0;
@@ -109,6 +109,7 @@ img {
   gap: 3rem;
 }
 
+/* ==================== SECTION STYLES ==================== */
 .section {
   padding-block: 7rem 4rem;
 }
@@ -137,39 +138,29 @@ img {
   margin-bottom: 3.5rem;
 }
 
-/*=============== HEADER & NAV ===============*/
+/* ==================== HEADER & NAVIGATION ==================== */
 .header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 80px;
-  background-color: transparent; /* Transparent at the very top */
+  background-color: transparent;
   z-index: var(--z-fixed);
   transition:
     background-color 0.4s,
-    backdrop-filter 0.4s; /* Smooth transition */
-  pointer-events: none; /* Allow clicks to pass through when transparent */
+    backdrop-filter 0.4s;
+  pointer-events: none;
 }
 
-/*=============== BLUR HEADER ===============*/
 .blur-header {
-  background-color: transparent; /* Makes sure the background is clear */
+  background-color: transparent;
   backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px); /* Required for Safari support */
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Subtle line for depth */
-}
-
-/*=============== NAVIGATION ===============*/
-.nav {
-  height: var(--header-height);
-  display: flex;
-  justify-content: center; /* Centers the menu horizontally */
-  align-items: center;
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .nav__menu {
-  /* Desktop: position fixed at top with header, centered */
   position: fixed;
   top: 0;
   left: 50%;
@@ -185,17 +176,19 @@ img {
 
 .nav__list {
   display: flex;
-  column-gap: 3rem; /* Adjust this for more/less spacing between items */
+  column-gap: 3rem;
 }
 
 .nav__link {
   display: flex;
-  flex-direction: column; /* Stacks Icon on top of Text */
+  flex-direction: column;
   align-items: center;
   row-gap: 0.25rem;
   color: var(--title-color);
   font-weight: 500;
-  transition: 0.3s;
+  transition:
+    color 0.3s,
+    translate 0.3s;
 }
 
 .nav__link i {
@@ -204,16 +197,15 @@ img {
 
 .nav__name {
   font-size: var(--tiny-font-size);
-  /* You can change this to var(--small-font-size) if tiny is too small */
 }
 
-/* Active Link & Hover */
 .nav__link:hover,
 .nav__link.active-link {
   color: var(--first-color);
+  translate: 0 -5px;
 }
 
-/*=============== HOME ===============*/
+/* ==================== HOME / HERO SECTION ==================== */
 .home {
   min-height: 100vh;
   padding-top: 7rem;
@@ -269,7 +261,7 @@ img {
 
 .button:hover {
   background-color: var(--first-color-light);
-  transform: translateY(-5px);
+  translate: 0 -5px;
   box-shadow: 0 15px 40px var(--active-shadow);
 }
 
@@ -329,13 +321,12 @@ img {
 }
 
 .home__social {
-  /* Remove absolute positioning */
   display: flex;
-  flex-direction: row; /* Change from column to row for horizontal layout */
+  flex-direction: row;
   justify-content: center;
   gap: 1.8rem;
   font-size: 1.7rem;
-  margin-top: 2rem; /* Adds space between the image and the icons */
+  margin-top: 2rem;
 }
 
 .home__social-link {
@@ -345,17 +336,15 @@ img {
   cursor: pointer;
   font-family: inherit;
   font-size: 1.25rem;
-  color: var(--first-color); /* Matches your GitHub/LinkedIn color */
+  color: var(--first-color);
   transition:
     transform 0.3s,
     color 0.3s;
 }
 
 .home__social-link:hover {
-  transform: translateY(-0.25rem);
-  color: var(
-    --first-color-alt
-  ); /* Optional: a slightly different shade on hover */
+  translate: 0 -0.25rem;
+  color: var(--first-color-alt);
 }
 
 .home__scroll {
@@ -369,7 +358,7 @@ img {
   color: var(--text-color);
 }
 
-/*=============== ABOUT ===============*/
+/* ==================== ABOUT SECTION ==================== */
 .about__container {
   grid-template-columns: 1fr 1fr;
   align-items: center;
@@ -386,7 +375,7 @@ img {
 }
 
 .about__img:hover {
-  transform: scale(1.05);
+  scale: 1.05;
   filter: drop-shadow(0 0 50px var(--active-shadow));
 }
 
@@ -407,7 +396,7 @@ img {
 }
 
 .about__box:hover {
-  transform: translateY(-10px);
+  translate: 0 -5px;
   background-color: var(--container-color-light);
   box-shadow: 0 5px 15px var(--active-shadow);
 }
@@ -432,7 +421,7 @@ img {
   margin-bottom: 2rem;
 }
 
-/*=============== SKILLS ===============*/
+/* ==================== SKILLS SECTION ==================== */
 .skills__content {
   background-color: var(--body-color);
   padding: 3rem;
@@ -444,7 +433,7 @@ img {
 }
 
 .skills__content:hover {
-  transform: translateY(-5px);
+  translate: 0 -5px;
   box-shadow: 0 15px 40px var(--active-shadow);
 }
 
@@ -487,7 +476,7 @@ img {
   font-size: 0.75rem;
 }
 
-/*=============== SERVICES ===============*/
+/* ==================== SERVICES SECTION ==================== */
 .services__container {
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
@@ -503,7 +492,7 @@ img {
 }
 
 .services__card:hover {
-  transform: translateY(-15px);
+  translate: 0 -5px;
   background-color: var(--first-color);
   color: var(--body-color);
   box-shadow: 0 5px 15px var(--active-shadow);
@@ -527,7 +516,7 @@ img {
   cursor: pointer;
 }
 
-/*=============== PROJECTS ===============*/
+/* ==================== PROJECTS / PORTFOLIO SECTION ==================== */
 .projects__container {
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 2.2rem;
@@ -542,7 +531,7 @@ img {
 }
 
 .projects__card:hover {
-  transform: translateY(-12px);
+  translate: 0 -5px;
   box-shadow: 0 20px 35px var(--active-shadow);
 }
 
@@ -580,7 +569,7 @@ img {
   transform: translateX(6px);
 }
 
-/*=============== CONTACT ===============*/
+/* ==================== CONTACT SECTION ==================== */
 .contact__container {
   grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
   gap: 4rem;
@@ -596,18 +585,16 @@ img {
 .contact__card {
   background-color: var(--container-color);
   padding: 1.8rem;
-  border-radius: 1rem; /* Restores the rounded corners */
+  border-radius: 1rem;
   text-align: center;
-  transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* Smoother transition */
+  transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 5px 15px var(--general-shadow);
-  cursor: pointer; /* Makes the whole card feel clickable */
+  cursor: pointer;
 }
 
 .contact__card:hover {
   box-shadow: 0 15px 35px var(--active-shadow);
-  transform: translateY(
-    -5px
-  ); /* Optional: adds a little lift like your other cards */
+  translate: 0 -5px;
 }
 
 .contact__card:hover .contact__social-link {
@@ -622,9 +609,9 @@ img {
   background: none;
   border: none;
   padding: 0;
-  font-family: var(--body-font); /* Forces Poppins */
+  font-family: var(--body-font);
   cursor: pointer;
-  transition: color 0.4s ease; /* Matches the card transition speed */
+  transition: color 0.4s ease;
 }
 
 .contact__social-link:hover {
@@ -667,11 +654,11 @@ img {
   resize: none;
 }
 
-/*=============== SCROLL UP ===============*/
+/* ==================== SCROLL UP BUTTON ==================== */
 .scrollup {
   position: fixed;
   right: 1rem;
-  bottom: -50%; /* Hidden by default */
+  bottom: -50%;
   background-color: var(--container-color);
   display: inline-flex;
   padding: 8px;
@@ -687,18 +674,17 @@ img {
 }
 
 .scrollup:hover {
-  transform: translateY(-0.25rem);
+  translate: 0 -0.25rem;
   background-color: var(--first-color);
-  color: var(--body-color); /* Dark text on green background looks cleaner */
-  box-shadow: 0 8px 16px var(--active-shadow); /* That signature glow */
+  color: var(--body-color);
+  box-shadow: 0 8px 16px var(--active-shadow);
 }
 
-/* Show Scroll Up - Triggered by JS */
 .show-scroll {
   bottom: 3rem;
 }
 
-/*=============== FOOTER ===============*/
+/* ==================== FOOTER ==================== */
 .footer {
   background-color: hsl(228, 15%, 12%);
   padding-block: 4rem 3rem;
@@ -720,11 +706,14 @@ img {
 
 .footer__link {
   color: var(--text-color);
-  transition: 0.3s;
+  transition:
+    color 0.3s,
+    transform 0.3s;
 }
 
 .footer__link:hover {
   color: var(--first-color);
+  translate: 0 -5px;
 }
 
 .footer__social {
@@ -739,13 +728,16 @@ img {
   border: none;
   padding: 0;
   cursor: pointer;
-  font-size: 1.25rem; /* Match this to your existing footer icon size */
-  color: var(--title-color); /* Or whatever your footer icon color is */
-  transition: color 0.3s;
+  font-size: 1.25rem;
+  color: var(--title-color);
+  transition:
+    color 0.3s,
+    transform 0.3s;
 }
 
 .footer__social-link:hover {
   color: var(--first-color);
+  translate: 0 -5px;
 }
 
 .footer__copy {
@@ -754,36 +746,34 @@ img {
   margin-top: 3rem;
 }
 
-/*=============== RESPONSIVE ===============*/
+/* ==================== RESPONSIVE DESIGN - MEDIUM DEVICES (1024px) ==================== */
 @media screen and (max-width: 1024px) {
   .home__container {
-    /* Ensure the main container grows to push elements apart */
     row-gap: 4rem;
     padding-bottom: 2rem;
   }
 
   .home__social {
-    /* Remove any absolute positioning that might be causing the overlap */
     position: static;
     display: flex;
     justify-content: center;
     column-gap: 2.5rem;
-    margin-top: 2rem; /* Adds space above icons */
+    margin-top: 2rem;
   }
 
   .home__scroll {
-    /* On tablets, we can keep the scroll icon but move it down 
-       or hide it if the screen height is too small */
     margin-top: 3rem;
   }
 }
 
-/* Specific fix for very short screens (like a tablet in landscape) */
+/* ==================== RESPONSIVE DESIGN - SHORT SCREENS (max-height: 700px) ==================== */
 @media screen and (max-height: 700px) {
   .home__scroll {
     display: none;
   }
 }
+
+/* ==================== RESPONSIVE DESIGN - TABLETS (992px) ==================== */
 @media screen and (max-width: 992px) {
   .container {
     max-width: 720px;
@@ -808,26 +798,24 @@ img {
   }
 }
 
+/* ==================== RESPONSIVE DESIGN - MOBILE (768px) ==================== */
 @media screen and (max-width: 768px) {
   .home__container {
     row-gap: 3rem;
     padding-bottom: 4rem;
   }
 
-  /* Space out the social icons and ensure they are above the scroll button */
   .home__social {
-    /* This separates the socials from the scroll-down icon */
     margin-bottom: 2rem;
     display: flex;
     justify-content: center;
-    column-gap: 2rem; /* Give icons more room to breathe */
+    column-gap: 2rem;
   }
 
-  /* Hide the "Scroll Down" text on small mobiles if it's still overlapping */
   .home__scroll {
     display: none;
   }
-  /* Hide text labels — icons only on mobile */
+
   .nav__name {
     display: none;
   }
@@ -836,7 +824,7 @@ img {
     position: fixed;
     bottom: 1.2rem;
     left: 50%;
-    top: auto; /* Remove top positioning for mobile */
+    top: auto;
     transform: translateX(-50%);
     width: auto;
     height: auto;
@@ -854,9 +842,6 @@ img {
     column-gap: 1.5rem;
   }
 
-  /* Fix: backdrop-filter on .header creates a new containing block,
-     which traps the fixed nav__menu inside it and clips it on scroll.
-     On mobile the header bar is invisible anyway, so we disable it. */
   .blur-header {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
@@ -864,6 +849,8 @@ img {
     border-bottom: none;
   }
 }
+
+/* ==================== RESPONSIVE DESIGN - SMALL DEVICES (576px) ==================== */
 @media screen and (max-width: 576px) {
   .home__handle {
     width: 280px;
@@ -874,7 +861,6 @@ img {
     grid-template-columns: 1fr;
   }
 
-  /* Force single column so minmax(320px) doesn't overflow narrow screens */
   .projects__container {
     grid-template-columns: 1fr;
   }
@@ -884,7 +870,7 @@ img {
   }
 }
 
-/* Very narrow devices (iPhone SE 1st gen, Galaxy A series, etc.) */
+/* ==================== RESPONSIVE DESIGN - VERY SMALL DEVICES (380px) ==================== */
 @media screen and (max-width: 380px) {
   .home__handle {
     width: 230px;
