@@ -85,7 +85,7 @@ img {
   display: block;
   font-size: var(--small-font-size);
   color: var(--first-color);
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.4rem;
   text-align: center;
 }
 
@@ -93,7 +93,7 @@ img {
   font-size: var(--h2-font-size);
   color: var(--title-color);
   text-align: center;
-  margin-bottom: 3.5rem;
+  margin-bottom: 2rem;
 }
 
 /* ==================== COPY NOTIFICATION ==================== */
@@ -588,7 +588,7 @@ img {
 .certificates__container {
   display: flex;
   justify-content: center;
-  gap: 2.2rem;
+  gap: 2rem;
   flex-wrap: wrap;
 }
 
@@ -598,8 +598,10 @@ img {
   overflow: hidden;
   transition: 0.4s ease;
   box-shadow: 0 5px 15px var(--general-shadow);
-  max-width: 320px;
+  max-width: 300px;
   width: 100%;
+  max-height: 60vh;
+  height: 100%;
   text-align: center;
 }
 
@@ -715,35 +717,6 @@ img {
   resize: none;
 }
 
-/* ==================== SCROLL UP BUTTON ==================== */
-.scrollup {
-  position: fixed;
-  right: 1rem;
-  bottom: -50%;
-  background-color: var(--container-color);
-  display: inline-flex;
-  padding: 8px;
-  border-radius: 0.25rem;
-  z-index: var(--z-fixed);
-  color: var(--title-color);
-  font-size: 1.25rem;
-  box-shadow: 0 4px 12px var(--general-shadow);
-  transition:
-    bottom 0.4s,
-    transform 0.4s,
-    background-color 0.4s;
-}
-
-.scrollup:hover {
-  translate: 0 -0.25rem;
-  background-color: var(--first-color);
-  color: var(--body-color);
-  box-shadow: 0 8px 16px var(--active-shadow);
-}
-
-.show-scroll {
-  bottom: 3rem;
-}
 /* ==================== CERTIFICATE MODAL ==================== */
 .modal {
   display: none;
@@ -880,6 +853,36 @@ img {
   margin-top: 3rem;
 }
 
+/* ==================== SCROLL UP BUTTON ==================== */
+.scrollup {
+  position: fixed;
+  right: 1rem;
+  bottom: -50%;
+  background-color: var(--container-color);
+  display: inline-flex;
+  padding: 8px;
+  border-radius: 0.25rem;
+  z-index: var(--z-fixed);
+  color: var(--title-color);
+  font-size: 1.25rem;
+  box-shadow: 0 4px 12px var(--general-shadow);
+  transition:
+    bottom 0.4s,
+    transform 0.4s,
+    background-color 0.4s;
+}
+
+.scrollup:hover {
+  translate: 0 -0.25rem;
+  background-color: var(--first-color);
+  color: var(--body-color);
+  box-shadow: 0 8px 16px var(--active-shadow);
+}
+
+.show-scroll {
+  bottom: 3rem;
+}
+
 /* ==================== FULLSCREEN SECTIONS - DESKTOP ONLY ==================== */
 @media screen and (min-width: 992px) {
   .section {
@@ -915,13 +918,6 @@ img {
 
   .home__scroll {
     margin-top: 3rem;
-  }
-}
-
-/* ==================== RESPONSIVE - 700px HEIGHT ==================== */
-@media screen and (max-height: 700px) {
-  .home__scroll {
-    display: none;
   }
 }
 
@@ -1007,6 +1003,13 @@ img {
 
   .certificates__card {
     max-width: 280px;
+  }
+}
+
+/* ==================== RESPONSIVE - 700px HEIGHT ==================== */
+@media screen and (max-height: 700px) {
+  .home__scroll {
+    display: none;
   }
 }
 
