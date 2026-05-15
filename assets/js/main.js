@@ -87,10 +87,12 @@ sr.reveal(
   `.home__data, .home__social, .contact__container, .footer__container`,
 );
 sr.reveal(`.home__handle`, { origin: "bottom" });
-sr.reveal(`.skills__content`, { origin: "left", duration: 800 });
+sr.reveal(`.skills__badges`, { origin: "left", duration: 800 });
 sr.reveal(`.about__img-wrapper`, { origin: "left", duration: 800 });
 sr.reveal(`.about__data`, { origin: "right", duration: 800 });
 sr.reveal(`.projects__card`, { interval: 100, delay: 100 });
+sr.reveal(`.education__card`, { interval: 100, delay: 100 });
+sr.reveal(`.certificates__card`, { interval: 100, delay: 100 });
 
 /* ==================== CERTIFICATE MODAL ==================== */
 const modal = document.getElementById("certModal");
@@ -139,4 +141,15 @@ document.querySelectorAll(".certificates__card").forEach((card) => {
       openCertificateModal(img.src, verifyLink);
     });
   }
+});
+
+// ==================== FORMSPREE CONTACT FORM ====================
+window.formspree =
+  window.formspree ||
+  function () {
+    (formspree.q = formspree.q || []).push(arguments);
+  };
+formspree("initForm", {
+  formElement: "#contact-form",
+  formId: "mgodgvqe",
 });
