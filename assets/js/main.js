@@ -1,15 +1,3 @@
-/* ==================== CONSTANTS ==================== */
-const EMAIL = "pfaramazi@gmail.com";
-const GITHUB_USERNAME = "parsafaramarzi";
-const GITHUB_TOPICS = [
-  "artificial-intelligence",
-  "machine-learning",
-  "deep-learning",
-  "computer-vision",
-  "data-science",
-  "data-analysis",
-];
-
 /* ==================== BLUR HEADER ==================== */
 const blurHeader = () => {
   const header = document.getElementById("header");
@@ -21,8 +9,13 @@ window.addEventListener("scroll", blurHeader);
 
 /* ==================== COPY TO CLIPBOARD ==================== */
 function copyEmail(element) {
+  if (!portfolioData) {
+    console.error("Portfolio data not loaded");
+    return;
+  }
+
   navigator.clipboard
-    .writeText(EMAIL)
+    .writeText(portfolioData.personal.email)
     .then(() => {
       const notification = document.createElement("div");
       notification.className = "copy-notification";
@@ -133,18 +126,6 @@ modal.addEventListener("click", (e) => {
   }
 });
 
-document.querySelectorAll(".certificates__card").forEach((card) => {
-  const img = card.querySelector(".certificates__img");
-  const verifyLink = card.getAttribute("data-verify-link") || "";
-  if (img) {
-    card.style.cursor = "pointer";
-    card.addEventListener("click", (e) => {
-      if (e.target.closest(".modal__verify-btn")) return;
-      openCertificateModal(img.src, verifyLink);
-    });
-  }
-});
-
 /* ==================== FORMSPREE CONTACT FORM ==================== */
 window.formspree =
   window.formspree ||
@@ -156,298 +137,122 @@ formspree("initForm", {
   formId: "mgodgvqe",
 });
 
-/* ==================== GITHUB TECH STACK ==================== */
-async function fetchAndDisplayTechStack() {
-  const badgesContainer = document.querySelector(".skills__badges");
-  if (!badgesContainer) return;
+/* ==================== RENDER FUNCTIONS FOR DYNAMIC CONTENT ==================== */
 
-  badgesContainer.classList.add("loading");
-  badgesContainer.innerHTML = "";
+function renderHomeSection(data) {
+  const homeData = document.querySelector(".home__data");
+  if (!homeData) return;
 
-  const readmeUrl =
-    "https://raw.githubusercontent.com/parsafaramarzi/parsafaramarzi/main/README.md";
+  homeData.innerHTML = `
+    <span class="home__greeting">${data.personal.greeting}</span>
+    <h1 class="home__name">${data.personal.name}</h1>
+    <h3 class="home__education">${data.personal.role}</h3>
 
-  try {
-    const response = await fetch(readmeUrl);
-    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+    <div class="home__buttons">
+      <a
+        href="${data.personal.cvUrl}"
+        class="button"
+        download="${data.personal.cvFileName}"
+        >Download CV</a
+      >
+      <a href="#contact" class="button button--ghost">Contact Me</a>
+    </div>
+  `;
+}
 
-    const markdown = await response.text();
-    const techStackSection = markdown.match(
-      /# Tech Stack:([\s\S]*?)(?=\n#|\n##|$)/,
-    );
-    if (!techStackSection) throw new Error("Tech Stack section not found");
-
-    const badgesMarkdown = techStackSection[1];
-    const badgeRegex = /!\[.*?\]\((https?:\/\/img\.shields\.io\/[^)]+)\)/g;
-    const badgeUrls = [];
-    let match;
-
-    while ((match = badgeRegex.exec(badgesMarkdown)) !== null) {
-      badgeUrls.push(match[1]);
-    }
-
-    if (badgeUrls.length === 0)
-      throw new Error("No badges found in Tech Stack section");
-
-    badgesContainer.innerHTML = "";
-    badgeUrls.forEach((url) => {
-      const img = document.createElement("img");
-      img.src = url;
-      img.alt = "Tech Stack Badge";
-      img.loading = "lazy";
-      badgesContainer.appendChild(img);
-    });
-  } catch (error) {
-    console.error("Error fetching tech stack:", error);
-    badgesContainer.innerHTML =
-      "<p>Could not load tech stack. Please try again later.</p>";
-  } finally {
-    badgesContainer.classList.remove("loading");
+function renderAboutSection(data) {
+  const aboutDescription = document.querySelector(".about__description");
+  if (aboutDescription) {
+    aboutDescription.textContent = data.about.description;
   }
 }
 
-document.addEventListener("DOMContentLoaded", fetchAndDisplayTechStack);
-
-/* ==================== DYNAMIC ABOUT SECTION ==================== */
-function updateLearningDuration() {
-  const startDate = new Date(2023, 9, 1);
-  const today = new Date();
-
-  let years = today.getFullYear() - startDate.getFullYear();
-  let months = today.getMonth() - startDate.getMonth();
-
-  if (months < 0) {
-    years--;
-    months += 12;
-  }
-
-  const durationElement = document.getElementById("learning-duration");
-  if (durationElement) {
-    let durationText = "";
-    if (years > 0) {
-      durationText += `${years} Year${years > 1 ? "s" : ""}`;
-      if (months > 0)
-        durationText += `, ${months} Month${months > 1 ? "s" : ""}`;
-    } else if (months > 0) {
-      durationText += `${months} Month${months > 1 ? "s" : ""}`;
-    } else {
-      durationText = "Just Started";
-    }
-    durationElement.textContent = durationText;
-  }
-}
-
-async function updateGitHubRepoCount() {
-  const repoElement = document.getElementById("repo-count");
-  if (!repoElement) return;
-
-  const CACHE_KEY = "github_repo_count";
-  const CACHE_EXPIRY = 3600000;
-
-  const cached = localStorage.getItem(CACHE_KEY);
-  if (cached) {
-    const { count, timestamp } = JSON.parse(cached);
-    if (Date.now() - timestamp < CACHE_EXPIRY) {
-      repoElement.textContent = count + "+";
-      return;
-    }
-  }
-
-  try {
-    repoElement.textContent = "...";
-    const response = await fetch(
-      `https://api.github.com/users/${GITHUB_USERNAME}`,
-    );
-
-    if (!response.ok) {
-      throw new Error(`GitHub API responded with status ${response.status}`);
-    }
-
-    const data = await response.json();
-    const repoCount = data.public_repos;
-
-    if (typeof repoCount === "number") {
-      repoElement.textContent = repoCount + "+";
-      localStorage.setItem(
-        CACHE_KEY,
-        JSON.stringify({
-          count: repoCount,
-          timestamp: Date.now(),
-        }),
-      );
-    } else {
-      throw new Error("Invalid data structure received from GitHub API");
-    }
-  } catch (error) {
-    console.error("Failed to fetch GitHub repo count:", error);
-    repoElement.textContent = "?";
-  }
-}
-
-document.addEventListener("DOMContentLoaded", async () => {
-  updateLearningDuration();
-  await updateGitHubRepoCount();
-});
-
-/* ==================== DYNAMIC PROJECTS FROM GITHUB (PAGINATED) ==================== */
-let allProjects = [];
-let currentPage = 1;
-const projectsPerPage = 4;
-let projectsRevealed = false; // Flag to run ScrollReveal only once
-
-async function fetchAndDisplayProjects() {
-  const container = document.getElementById("projects-container");
-  const prevBtn = document.getElementById("projects-prev");
-  const nextBtn = document.getElementById("projects-next");
-  const pageIndicator = document.getElementById("projects-page-indicator");
-
+function renderEducationSection(data) {
+  const container = document.getElementById("education-container");
   if (!container) return;
 
-  container.innerHTML =
-    '<div class="loading-projects">Loading projects from GitHub...</div>';
-  if (prevBtn) prevBtn.disabled = true;
-  if (nextBtn) nextBtn.disabled = true;
-
-  const apiUrl = `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`;
-
-  try {
-    const response = await fetch(apiUrl);
-    if (!response.ok) throw new Error(`GitHub API error: ${response.status}`);
-
-    const allRepos = await response.json();
-
-    allProjects = allRepos.filter((repo) => {
-      if (!repo.topics || !Array.isArray(repo.topics)) return false;
-      return repo.topics.some((topic) => GITHUB_TOPICS.includes(topic));
-    });
-
-    if (allProjects.length === 0) {
-      container.innerHTML =
-        '<div class="loading-projects">No AI/ML projects found. Check back soon!</div>';
-      if (pageIndicator) pageIndicator.textContent = "Page 0 / 0";
-      return;
-    }
-
-    currentPage = 1;
-    renderProjectsPage(false);
-
-    if (prevBtn) {
-      prevBtn.onclick = () => {
-        if (currentPage > 1) {
-          currentPage--;
-          renderProjectsPage();
-        }
-      };
-    }
-    if (nextBtn) {
-      nextBtn.onclick = () => {
-        const totalPages = Math.ceil(allProjects.length / projectsPerPage);
-        if (currentPage < totalPages) {
-          currentPage++;
-          renderProjectsPage();
-        }
-      };
-    }
-  } catch (error) {
-    console.error("Failed to fetch projects:", error);
-    container.innerHTML =
-      '<div class="loading-projects">Failed to load projects. Please try again later.</div>';
-    if (pageIndicator) pageIndicator.textContent = "Error";
-  }
-}
-
-function renderProjectsPage(animate = true) {
-  const container = document.getElementById("projects-container");
-  const prevBtn = document.getElementById("projects-prev");
-  const nextBtn = document.getElementById("projects-next");
-  const pageIndicator = document.getElementById("projects-page-indicator");
-
-  if (!container) return;
-
-  const totalPages = Math.ceil(allProjects.length / projectsPerPage);
-  const start = (currentPage - 1) * projectsPerPage;
-  const end = start + projectsPerPage;
-  const projectsToShow = allProjects.slice(start, end);
-
-  if (!animate) {
-    rebuildCards(projectsToShow, container);
-    updatePaginationButtons(
-      prevBtn,
-      nextBtn,
-      pageIndicator,
-      currentPage,
-      totalPages,
-    );
-    return;
-  }
-
-  container.classList.add("fade-out");
-  setTimeout(() => {
-    rebuildCards(projectsToShow, container);
-    updatePaginationButtons(
-      prevBtn,
-      nextBtn,
-      pageIndicator,
-      currentPage,
-      totalPages,
-    );
-    container.classList.remove("fade-out");
-    container.classList.add("fade-in");
-    setTimeout(() => {
-      container.classList.remove("fade-in");
-    }, 300);
-  }, 300);
-}
-
-function adjustTitleFontSize(titleElement) {
-  const lineHeight = parseFloat(getComputedStyle(titleElement).lineHeight);
-  const maxHeight = lineHeight * 2;
-  let fontSize = 1.0;
-
-  titleElement.style.fontSize = fontSize + "rem";
-
-  if (titleElement.scrollHeight <= maxHeight) return;
-
-  while (titleElement.scrollHeight > maxHeight && fontSize > 0.7) {
-    fontSize -= 0.05;
-    titleElement.style.fontSize = fontSize + "rem";
-  }
-}
-
-function rebuildCards(projects, container) {
   container.innerHTML = "";
-  projects.forEach((repo) => {
+  data.education.forEach((edu) => {
     const card = document.createElement("div");
-    card.className = "projects__card";
-    const ogImageUrl = `https://opengraph.githubassets.com/1/${GITHUB_USERNAME}/${repo.name}`;
+    card.className = "education__card";
     card.innerHTML = `
-      <img src="${ogImageUrl}" alt="${repo.name}" class="projects__img" onerror="this.src='https://via.placeholder.com/300x150?text=No+Preview'">
-      <h3 class="projects__title"></h3>
-      <a href="${repo.html_url}" class="projects__button" target="_blank" rel="noopener noreferrer">
-        View Project <i class="ri-arrow-right-line"></i>
-      </a>
+      <div class="education__icon">
+        <i class="ri-graduation-cap-line"></i>
+      </div>
+      <h3 class="education__title">${edu.degree}</h3>
+      <div class="education__year${edu.isOngoing ? " education__year--ongoing" : ""}">
+        ${edu.years}
+      </div>
+      <div class="education__program">
+        ${edu.program}
+      </div>
+      <p class="education__description">
+        ${edu.description}
+      </p>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function renderCertificatesSection(data) {
+  const container = document.getElementById("certificates-container");
+  if (!container) return;
+
+  container.innerHTML = "";
+  data.certificates.forEach((cert) => {
+    const card = document.createElement("div");
+    card.className = "certificates__card";
+    card.setAttribute("data-verify-link", cert.verifyLink);
+    card.innerHTML = `
+      <img
+        src="${cert.image}"
+        alt="${cert.title}"
+        class="certificates__img"
+      />
+      <h3 class="certificates__title">${cert.title}</h3>
+      <p class="certificates__description">
+        ${cert.description}
+      </p>
     `;
 
-    const titleEl = card.querySelector(".projects__title");
-    if (titleEl) {
-      titleEl.textContent = repo.name.replace(/-/g, " ");
-      adjustTitleFontSize(titleEl);
+    const img = card.querySelector(".certificates__img");
+    if (img) {
+      card.style.cursor = "pointer";
+      card.addEventListener("click", (e) => {
+        if (e.target.closest(".modal__verify-btn")) return;
+        openCertificateModal(img.src, cert.verifyLink);
+      });
     }
 
     container.appendChild(card);
   });
+}
 
-  // Run ScrollReveal only once, after the first cards are in the DOM
-  if (!projectsRevealed && typeof sr !== "undefined") {
-    sr.reveal(`.projects__card`, { interval: 100, delay: 100 });
-    projectsRevealed = true;
+function renderContactSection(data) {
+  const emailAddress = document.querySelector(".email-address");
+  if (emailAddress) {
+    emailAddress.textContent = data.personal.email;
   }
 }
 
-function updatePaginationButtons(prevBtn, nextBtn, pageIndicator, page, total) {
-  if (pageIndicator) pageIndicator.textContent = `Page ${page} / ${total}`;
-  if (prevBtn) prevBtn.disabled = page === 1;
-  if (nextBtn) nextBtn.disabled = page === total;
+/* ==================== INITIALIZE APP ==================== */
+async function initializeApp() {
+  const data = await loadPortfolioData();
+  if (!data) {
+    console.error("Failed to load portfolio data");
+    return;
+  }
+
+  renderHomeSection(data);
+  renderAboutSection(data);
+  renderEducationSection(data);
+  renderCertificatesSection(data);
+  renderContactSection(data);
+
+  updateLearningDuration();
+  await updateGitHubRepoCount();
+  await fetchAndDisplayTechStack();
+  await fetchAndDisplayProjects();
 }
 
-document.addEventListener("DOMContentLoaded", fetchAndDisplayProjects);
+document.addEventListener("DOMContentLoaded", initializeApp);

@@ -1,0 +1,59 @@
+{
+  "personal": {
+    "name": "Parsa Faramarzi",
+    "greeting": "Hello, I'm",
+    "role": "AI Developer & Data Scientist",
+    "email": "pfaramazi@gmail.com",
+    "cvUrl": "./assets/CV/Parsa Faramarzi CV General.pdf",
+    "cvFileName": "Parsa_Faramarzi_CV.pdf",
+    "portrait": "./assets/img/portrait02.png"
+  },
+  "social": {
+    "github": "https://github.com/parsafaramarzi",
+    "linkedin": "https://www.linkedin.com/in/parsafaramarzi/"
+  },
+  "github": {
+    "username": "parsafaramarzi",
+    "topics": [
+      "artificial-intelligence",
+      "machine-learning",
+      "deep-learning",
+      "computer-vision",
+      "data-science",
+      "data-analysis"
+    ]
+  },
+  "about": {
+    "description": "Passionate AI developer and data scientist specializing in Deep Learning, Computer Vision, and intelligent automation systems. I have extensive experience in building real-time AI solutions using YOLO, PyTorch, TensorFlow, and OpenCV. My expertise spans across machine learning model development, data preprocessing, and deployment of production-ready systems. I'm driven by the challenge of solving complex problems through innovative AI technologies and continuously exploring cutting-edge advancements in the field.",
+    "learningStartDate": "2023-10-01"
+  },
+  "education": [
+    {
+      "degree": "Bachelor of Science (BSc)",
+      "years": "2018 — 2022",
+      "program": "Computer Engineering - Artificial Intelligence Track",
+      "description": "Solid foundation in algorithms, data structures, machine learning fundamentals, and software development."
+    },
+    {
+      "degree": "Master of Science (MSc)",
+      "years": "2023 — Present",
+      "program": "Artificial Intelligence & Data Science",
+      "isOngoing": true,
+      "description": "Specializing in Deep Learning, Computer Vision, and Large Language Models. Currently researching real-time AI systems."
+    }
+  ],
+  "certificates": [
+    {
+      "title": "Python Programming",
+      "image": "./assets/img/Parsa Faramarzi-MK-DMY9IU_en.png",
+      "description": "Completed a full Python course and can write, debug, and understand small‑to‑medium scripts using core syntax, OOP, and common libraries.",
+      "verifyLink": "https://maktabkhooneh.org/certificates/MK-DMY9IU"
+    },
+    {
+      "title": "Machine Learning with Python",
+      "image": "./assets/img/Parsa Faramarzi ML Cert - cen.jpg",
+      "description": "Can preprocess data and build/evaluate ML models and pipelines using scikit-learn, pandas, and NumPy.",
+      "verifyLink": "https://simiportal.ir/diplomaverification"
+    }
+  ]
+}

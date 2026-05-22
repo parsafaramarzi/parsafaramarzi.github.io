@@ -72,21 +72,7 @@
       <!-- ==================== HOME SECTION ==================== -->
       <section class="home section" id="home">
         <div class="home__container container grid">
-          <div class="home__data">
-            <span class="home__greeting">Hello, I'm</span>
-            <h1 class="home__name">Parsa Faramarzi</h1>
-            <h3 class="home__education">AI Developer & Data Scientist</h3>
-
-            <div class="home__buttons">
-              <a
-                href="./assets/CV/Parsa Faramarzi CV General.pdf"
-                class="button"
-                download="Parsa_Faramarzi_CV.pdf"
-                >Download CV</a
-              >
-              <a href="#contact" class="button button--ghost">Contact Me</a>
-            </div>
-          </div>
+          <div class="home__data"></div>
 
           <div class="home__handle">
             <svg
@@ -163,17 +149,7 @@
           </div>
 
           <div class="about__data">
-            <p class="about__description">
-              Passionate AI developer and data scientist specializing in Deep
-              Learning, Computer Vision, and intelligent automation systems. I
-              have extensive experience in building real-time AI solutions using
-              YOLO, PyTorch, TensorFlow, and OpenCV. My expertise spans across
-              machine learning model development, data preprocessing, and
-              deployment of production-ready systems. I'm driven by the
-              challenge of solving complex problems through innovative AI
-              technologies and continuously exploring cutting-edge advancements
-              in the field.
-            </p>
+            <p class="about__description"></p>
           </div>
         </div>
       </section>
@@ -217,39 +193,10 @@
         <span class="section__subtitle">My Academic Journey</span>
         <h2 class="section__title">My Education</h2>
 
-        <div class="education__container container grid">
-          <div class="education__card">
-            <div class="education__icon">
-              <i class="ri-graduation-cap-line"></i>
-            </div>
-            <h3 class="education__title">Bachelor of Science (BSc)</h3>
-            <div class="education__year">2018 — 2022</div>
-            <div class="education__program">
-              Computer Engineering - Artificial Intelligence Track
-            </div>
-            <p class="education__description">
-              Solid foundation in algorithms, data structures, machine learning
-              fundamentals, and software development.
-            </p>
-          </div>
-
-          <div class="education__card">
-            <div class="education__icon">
-              <i class="ri-graduation-cap-line"></i>
-            </div>
-            <h3 class="education__title">Master of Science (MSc)</h3>
-            <div class="education__year education__year--ongoing">
-              2023 — Present
-            </div>
-            <div class="education__program">
-              Artificial Intelligence & Data Science
-            </div>
-            <p class="education__description">
-              Specializing in Deep Learning, Computer Vision, and Large Language
-              Models. Currently researching real-time AI systems.
-            </p>
-          </div>
-        </div>
+        <div
+          class="education__container container grid"
+          id="education-container"
+        ></div>
       </section>
 
       <!-- ==================== CERTIFICATES SECTION ==================== -->
@@ -257,40 +204,10 @@
         <span class="section__subtitle">Professional Credentials</span>
         <h2 class="section__title">My Certificates</h2>
 
-        <div class="certificates__container container grid">
-          <div
-            class="certificates__card"
-            data-verify-link="https://maktabkhooneh.org/certificates/MK-DMY9IU"
-          >
-            <img
-              src="./assets/img/Parsa Faramarzi-MK-DMY9IU_en.png"
-              alt="Python Programming"
-              class="certificates__img"
-            />
-            <h3 class="certificates__title">Python Programming</h3>
-            <p class="certificates__description">
-              Completed a full Python course and can write, debug, and
-              understand small‑to‑medium scripts using core syntax, OOP, and
-              common libraries.
-            </p>
-          </div>
-
-          <div
-            class="certificates__card"
-            data-verify-link="https://simiportal.ir/diplomaverification"
-          >
-            <img
-              src="./assets/img/Parsa Faramarzi ML Cert - cen.jpg"
-              alt="Machine Learning with Python"
-              class="certificates__img"
-            />
-            <h3 class="certificates__title">Machine Learning with Python</h3>
-            <p class="certificates__description">
-              Can preprocess data and build/evaluate ML models and pipelines
-              using scikit-learn, pandas, and NumPy.
-            </p>
-          </div>
-        </div>
+        <div
+          class="certificates__container container grid"
+          id="certificates-container"
+        ></div>
       </section>
 
       <!-- ==================== CONTACT SECTION ==================== -->
@@ -304,7 +221,7 @@
             <div class="contact__card" onclick="copyEmail(this)">
               <button class="contact__social-link" title="Click to Copy">
                 <i class="ri-mail-line"></i>
-                <span class="email-address">pfaramazi@gmail.com</span>
+                <span class="email-address"></span>
               </button>
             </div>
           </div>
@@ -422,6 +339,7 @@
 
     <!-- ==================== SCRIPTS ==================== -->
     <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="./assets/js/fetch.js"></script>
     <script src="./assets/js/main.js"></script>
     <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
   </body>
