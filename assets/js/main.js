@@ -425,6 +425,23 @@ function renderProjectsPage(animate = true) {
   }, 300);
 }
 
+function adjustTitleFontSize(titleElement) {
+  const lineHeight = parseFloat(getComputedStyle(titleElement).lineHeight);
+  const maxHeight = lineHeight * 2; // 2 lines
+  let fontSize = 1.0; // start at 1rem
+
+  titleElement.style.fontSize = fontSize + "rem";
+
+  // If already fits, do nothing
+  if (titleElement.scrollHeight <= maxHeight) return;
+
+  // Reduce font size until it fits or reaches minimum (0.7rem)
+  while (titleElement.scrollHeight > maxHeight && fontSize > 0.7) {
+    fontSize -= 0.05;
+    titleElement.style.fontSize = fontSize + "rem";
+  }
+}
+
 function rebuildCards(projects, container) {
   container.innerHTML = "";
   projects.forEach((repo) => {
@@ -433,11 +450,18 @@ function rebuildCards(projects, container) {
     const ogImageUrl = `https://opengraph.githubassets.com/1/parsafaramarzi/${repo.name}`;
     card.innerHTML = `
       <img src="${ogImageUrl}" alt="${repo.name}" class="projects__img" onerror="this.src='https://via.placeholder.com/300x150?text=No+Preview'">
-      <h3 class="projects__title">${repo.name.replace(/-/g, " ")}</h3>
+      <h3 class="projects__title"></h3>
       <a href="${repo.html_url}" class="projects__button" target="_blank" rel="noopener noreferrer">
         View Project <i class="ri-arrow-right-line"></i>
       </a>
     `;
+
+    const titleEl = card.querySelector(".projects__title");
+    if (titleEl) {
+      titleEl.textContent = repo.name.replace(/-/g, " ");
+      adjustTitleFontSize(titleEl);
+    }
+
     container.appendChild(card);
   });
 }

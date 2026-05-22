@@ -726,13 +726,18 @@ img {
 }
 
 .projects__title {
-  padding: 1rem 1rem 0.5rem !important;
-  color: var(--title-color) !important;
-  font-size: min(max(0.75rem, 1.2vw), 1rem) !important;
-  line-height: 1.35 !important;
-  max-height: 4.5rem !important;
-  overflow: hidden !important;
-  flex-shrink: 0 !important;
+  padding: 1rem 1rem 0.5rem;
+  color: var(--title-color);
+  font-size: 1rem;
+  max-height: 4rem;
+  overflow: hidden;
+  flex-shrink: 1;
+  text-overflow: ellipsis;
+  word-break: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-clamp: 2;
 }
 
 .projects__button {
