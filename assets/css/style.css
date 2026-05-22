@@ -9,10 +9,12 @@
   --title-color: hsl(228, 8%, 95%);
   --text-color: hsl(228, 8%, 70%);
   --body-color: hsl(228, 15%, 18%);
+  --body-color-dark: hsl(228, 15%, 12%);
   --container-color: hsl(228, 15%, 22%);
   --container-color-light: hsl(228, 15%, 28%);
   --general-shadow: rgba(0, 0, 0, 0.3);
   --active-shadow: rgba(0, 225, 255, 0.384);
+  --error-color: #ff4444;
 
   --body-font: "Poppins", sans-serif;
 
@@ -66,6 +68,50 @@ img {
 .grid {
   display: grid;
   gap: 3rem;
+}
+
+/* ==================== SHARED BUTTON STYLES ==================== */
+.button {
+  display: inline-block;
+  background-color: var(--first-color);
+  color: var(--body-color);
+  padding: 1.1rem 2.3rem;
+  border-radius: 0.6rem;
+  font-weight: 600;
+  transition: 0.3s;
+  box-shadow: 0 5px 20px var(--general-shadow);
+  border: none;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: var(--first-color-light);
+  translate: 0 -5px;
+  box-shadow: 0 15px 40px var(--active-shadow);
+}
+
+.button--ghost {
+  background: transparent;
+  color: var(--first-color);
+  border: 2px solid var(--first-color);
+}
+
+.button--ghost:hover {
+  background: var(--first-color);
+  color: var(--body-color);
+}
+
+/* ==================== SHARED CARD STYLES ==================== */
+.card {
+  background-color: var(--container-color);
+  border-radius: 1.25rem;
+  transition: 0.4s ease;
+  box-shadow: 0 5px 15px var(--general-shadow);
+}
+
+.card:hover {
+  translate: 0 -5px;
+  box-shadow: 0 20px 35px var(--active-shadow);
 }
 
 @media screen and (max-width: 992px) {
@@ -322,36 +368,6 @@ img {
   display: flex;
   gap: 1.5rem;
   flex-wrap: wrap;
-}
-
-.button {
-  display: inline-block;
-  background-color: var(--first-color);
-  color: var(--body-color);
-  padding: 1.1rem 2.3rem;
-  border-radius: 0.6rem;
-  font-weight: 600;
-  transition: 0.3s;
-  box-shadow: 0 5px 20px var(--general-shadow);
-  border: none;
-  cursor: pointer;
-}
-
-.button:hover {
-  background-color: var(--first-color-light);
-  translate: 0 -5px;
-  box-shadow: 0 15px 40px var(--active-shadow);
-}
-
-.button--ghost {
-  background: transparent;
-  color: var(--first-color);
-  border: 2px solid var(--first-color);
-}
-
-.button--ghost:hover {
-  background: var(--first-color);
-  color: var(--body-color);
 }
 
 .home__handle {
@@ -1090,7 +1106,6 @@ img {
   resize: none;
 }
 
-/* Formspree feedback styling */
 [data-fs-success] {
   background-color: var(--first-color);
   color: var(--body-color);
@@ -1102,7 +1117,7 @@ img {
 }
 
 [data-fs-error] {
-  background-color: #ff4444;
+  background-color: var(--error-color);
   color: white;
   padding: 0.75rem;
   border-radius: 0.6rem;
@@ -1202,7 +1217,7 @@ img {
 
 /* ==================== FOOTER ==================== */
 .footer {
-  background-color: hsl(228, 15%, 12%);
+  background-color: var(--body-color-dark);
   padding-block: 4rem 3rem;
   text-align: center;
 }

@@ -1,3 +1,15 @@
+/* ==================== CONSTANTS ==================== */
+const EMAIL = "pfaramazi@gmail.com";
+const GITHUB_USERNAME = "parsafaramarzi";
+const GITHUB_TOPICS = [
+  "artificial-intelligence",
+  "machine-learning",
+  "deep-learning",
+  "computer-vision",
+  "data-science",
+  "data-analysis",
+];
+
 /* ==================== BLUR HEADER ==================== */
 const blurHeader = () => {
   const header = document.getElementById("header");
@@ -9,13 +21,8 @@ window.addEventListener("scroll", blurHeader);
 
 /* ==================== COPY TO CLIPBOARD ==================== */
 function copyEmail(element) {
-  const emailSpan =
-    element.querySelector(".email-address") ||
-    document.querySelector(".contact__card .email-address");
-  const emailText = emailSpan.innerText;
-
   navigator.clipboard
-    .writeText(emailText)
+    .writeText(EMAIL)
     .then(() => {
       const notification = document.createElement("div");
       notification.className = "copy-notification";
@@ -88,9 +95,8 @@ sr.reveal(
 );
 sr.reveal(`.home__handle`, { origin: "bottom" });
 sr.reveal(`.skills__badges`, { origin: "left", duration: 800 });
-sr.reveal(`.about__img-wrapper`, { origin: "left", duration: 800 });
+sr.reveal(`.about__cards`, { origin: "left", duration: 800 });
 sr.reveal(`.about__data`, { origin: "right", duration: 800 });
-sr.reveal(`.projects__card`, { interval: 100, delay: 100 });
 sr.reveal(`.education__card`, { interval: 100, delay: 100 });
 sr.reveal(`.certificates__card`, { interval: 100, delay: 100 });
 
@@ -100,10 +106,9 @@ const modalImage = document.getElementById("modalImage");
 const modalVerifyContainer = document.getElementById("modalVerifyContainer");
 const modalClose = document.querySelector(".modal__close");
 
-// Function to open modal with image and optional verify link
 function openCertificateModal(imgSrc, verifyLink) {
   modalImage.src = imgSrc;
-  modalVerifyContainer.innerHTML = ""; // Clear previous button
+  modalVerifyContainer.innerHTML = "";
 
   if (verifyLink && verifyLink.trim() !== "") {
     const verifyBtn = document.createElement("a");
@@ -118,7 +123,6 @@ function openCertificateModal(imgSrc, verifyLink) {
   modal.style.display = "flex";
 }
 
-// Close modal when clicking on the close button or outside the content
 modalClose.addEventListener("click", () => {
   modal.style.display = "none";
 });
@@ -129,21 +133,19 @@ modal.addEventListener("click", (e) => {
   }
 });
 
-// Attach click handlers to all certificate cards
 document.querySelectorAll(".certificates__card").forEach((card) => {
   const img = card.querySelector(".certificates__img");
   const verifyLink = card.getAttribute("data-verify-link") || "";
   if (img) {
     card.style.cursor = "pointer";
     card.addEventListener("click", (e) => {
-      // Prevent opening modal if the click was on the button inside (if any)
       if (e.target.closest(".modal__verify-btn")) return;
       openCertificateModal(img.src, verifyLink);
     });
   }
 });
 
-// ==================== FORMSPREE CONTACT FORM ====================
+/* ==================== FORMSPREE CONTACT FORM ==================== */
 window.formspree =
   window.formspree ||
   function () {
@@ -155,15 +157,10 @@ formspree("initForm", {
 });
 
 /* ==================== GITHUB TECH STACK ==================== */
-/**
- * Fetches the README.md from GitHub, extracts the tech stack badges,
- * and injects them into the .skills__badges container.
- */
 async function fetchAndDisplayTechStack() {
   const badgesContainer = document.querySelector(".skills__badges");
   if (!badgesContainer) return;
 
-  // Show loading state
   badgesContainer.classList.add("loading");
   badgesContainer.innerHTML = "";
 
@@ -175,8 +172,6 @@ async function fetchAndDisplayTechStack() {
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
     const markdown = await response.text();
-
-    // Find the "Tech Stack" section and extract badges
     const techStackSection = markdown.match(
       /# Tech Stack:([\s\S]*?)(?=\n#|\n##|$)/,
     );
@@ -194,7 +189,6 @@ async function fetchAndDisplayTechStack() {
     if (badgeUrls.length === 0)
       throw new Error("No badges found in Tech Stack section");
 
-    // Clear and populate with new badges
     badgesContainer.innerHTML = "";
     badgeUrls.forEach((url) => {
       const img = document.createElement("img");
@@ -212,101 +206,94 @@ async function fetchAndDisplayTechStack() {
   }
 }
 
-// Fetch tech stack when the page loads
 document.addEventListener("DOMContentLoaded", fetchAndDisplayTechStack);
 
 /* ==================== DYNAMIC ABOUT SECTION ==================== */
-(async function initAboutSection() {
-  // --- 1. Calculate Learning Duration (Since October 2023) ---
-  function updateLearningDuration() {
-    const startDate = new Date(2023, 9, 1); // October 1, 2023
-    const today = new Date();
+function updateLearningDuration() {
+  const startDate = new Date(2023, 9, 1);
+  const today = new Date();
 
-    let years = today.getFullYear() - startDate.getFullYear();
-    let months = today.getMonth() - startDate.getMonth();
+  let years = today.getFullYear() - startDate.getFullYear();
+  let months = today.getMonth() - startDate.getMonth();
 
-    if (months < 0) {
-      years--;
-      months += 12;
+  if (months < 0) {
+    years--;
+    months += 12;
+  }
+
+  const durationElement = document.getElementById("learning-duration");
+  if (durationElement) {
+    let durationText = "";
+    if (years > 0) {
+      durationText += `${years} Year${years > 1 ? "s" : ""}`;
+      if (months > 0)
+        durationText += `, ${months} Month${months > 1 ? "s" : ""}`;
+    } else if (months > 0) {
+      durationText += `${months} Month${months > 1 ? "s" : ""}`;
+    } else {
+      durationText = "Just Started";
     }
+    durationElement.textContent = durationText;
+  }
+}
 
-    const durationElement = document.getElementById("learning-duration");
-    if (durationElement) {
-      let durationText = "";
-      if (years > 0) {
-        durationText += `${years} Year${years > 1 ? "s" : ""}`;
-        if (months > 0)
-          durationText += `, ${months} Month${months > 1 ? "s" : ""}`;
-      } else if (months > 0) {
-        durationText += `${months} Month${months > 1 ? "s" : ""}`;
-      } else {
-        durationText = "Just Started";
-      }
-      durationElement.textContent = durationText;
+async function updateGitHubRepoCount() {
+  const repoElement = document.getElementById("repo-count");
+  if (!repoElement) return;
+
+  const CACHE_KEY = "github_repo_count";
+  const CACHE_EXPIRY = 3600000;
+
+  const cached = localStorage.getItem(CACHE_KEY);
+  if (cached) {
+    const { count, timestamp } = JSON.parse(cached);
+    if (Date.now() - timestamp < CACHE_EXPIRY) {
+      repoElement.textContent = count + "+";
+      return;
     }
   }
 
-  // --- 2. Fetch and Cache GitHub Public Repo Count ---
-  async function updateGitHubRepoCount() {
-    const repoElement = document.getElementById("repo-count");
-    if (!repoElement) return;
+  try {
+    repoElement.textContent = "...";
+    const response = await fetch(
+      `https://api.github.com/users/${GITHUB_USERNAME}`,
+    );
 
-    const GITHUB_USERNAME = "parsafaramarzi";
-    const CACHE_KEY = "github_repo_count";
-    const CACHE_EXPIRY = 3600000; // 1 hour in milliseconds
-
-    // Check localStorage cache
-    const cached = localStorage.getItem(CACHE_KEY);
-    if (cached) {
-      const { count, timestamp } = JSON.parse(cached);
-      if (Date.now() - timestamp < CACHE_EXPIRY) {
-        repoElement.textContent = count + "+";
-        return;
-      }
+    if (!response.ok) {
+      throw new Error(`GitHub API responded with status ${response.status}`);
     }
 
-    // Fetch fresh data from GitHub API
-    try {
-      repoElement.textContent = "...";
-      const response = await fetch(
-        `https://api.github.com/users/${GITHUB_USERNAME}`,
+    const data = await response.json();
+    const repoCount = data.public_repos;
+
+    if (typeof repoCount === "number") {
+      repoElement.textContent = repoCount + "+";
+      localStorage.setItem(
+        CACHE_KEY,
+        JSON.stringify({
+          count: repoCount,
+          timestamp: Date.now(),
+        }),
       );
-
-      if (!response.ok) {
-        throw new Error(`GitHub API responded with status ${response.status}`);
-      }
-
-      const data = await response.json();
-      const repoCount = data.public_repos;
-
-      if (typeof repoCount === "number") {
-        repoElement.textContent = repoCount + "+";
-        // Cache the result
-        localStorage.setItem(
-          CACHE_KEY,
-          JSON.stringify({
-            count: repoCount,
-            timestamp: Date.now(),
-          }),
-        );
-      } else {
-        throw new Error("Invalid data structure received from GitHub API");
-      }
-    } catch (error) {
-      console.error("Failed to fetch GitHub repo count:", error);
-      repoElement.textContent = "?";
+    } else {
+      throw new Error("Invalid data structure received from GitHub API");
     }
+  } catch (error) {
+    console.error("Failed to fetch GitHub repo count:", error);
+    repoElement.textContent = "?";
   }
+}
 
-  // --- 3. Run Both Functions ---
+document.addEventListener("DOMContentLoaded", async () => {
   updateLearningDuration();
   await updateGitHubRepoCount();
-})();
+});
 
 /* ==================== DYNAMIC PROJECTS FROM GITHUB (PAGINATED) ==================== */
 let allProjects = [];
 let currentPage = 1;
 const projectsPerPage = 4;
+let projectsRevealed = false; // Flag to run ScrollReveal only once
 
 async function fetchAndDisplayProjects() {
   const container = document.getElementById("projects-container");
@@ -316,22 +303,12 @@ async function fetchAndDisplayProjects() {
 
   if (!container) return;
 
-  // Show loading state
   container.innerHTML =
     '<div class="loading-projects">Loading projects from GitHub...</div>';
   if (prevBtn) prevBtn.disabled = true;
   if (nextBtn) nextBtn.disabled = true;
 
-  const username = "parsafaramarzi";
-  const relevantTopics = [
-    "artificial-intelligence",
-    "machine-learning",
-    "deep-learning",
-    "computer-vision",
-    "data-science",
-    "data-analysis",
-  ];
-  const apiUrl = `https://api.github.com/users/${username}/repos?sort=updated&per_page=100`;
+  const apiUrl = `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`;
 
   try {
     const response = await fetch(apiUrl);
@@ -341,7 +318,7 @@ async function fetchAndDisplayProjects() {
 
     allProjects = allRepos.filter((repo) => {
       if (!repo.topics || !Array.isArray(repo.topics)) return false;
-      return repo.topics.some((topic) => relevantTopics.includes(topic));
+      return repo.topics.some((topic) => GITHUB_TOPICS.includes(topic));
     });
 
     if (allProjects.length === 0) {
@@ -352,14 +329,13 @@ async function fetchAndDisplayProjects() {
     }
 
     currentPage = 1;
-    renderProjectsPage(false); // initial render without animation
+    renderProjectsPage(false);
 
-    // Set up event listeners
     if (prevBtn) {
       prevBtn.onclick = () => {
         if (currentPage > 1) {
           currentPage--;
-          renderProjectsPage(); // animate
+          renderProjectsPage();
         }
       };
     }
@@ -368,7 +344,7 @@ async function fetchAndDisplayProjects() {
         const totalPages = Math.ceil(allProjects.length / projectsPerPage);
         if (currentPage < totalPages) {
           currentPage++;
-          renderProjectsPage(); // animate
+          renderProjectsPage();
         }
       };
     }
@@ -394,7 +370,6 @@ function renderProjectsPage(animate = true) {
   const projectsToShow = allProjects.slice(start, end);
 
   if (!animate) {
-    // Initial load – no animation
     rebuildCards(projectsToShow, container);
     updatePaginationButtons(
       prevBtn,
@@ -406,7 +381,6 @@ function renderProjectsPage(animate = true) {
     return;
   }
 
-  // Animate out, rebuild, then animate in
   container.classList.add("fade-out");
   setTimeout(() => {
     rebuildCards(projectsToShow, container);
@@ -427,15 +401,13 @@ function renderProjectsPage(animate = true) {
 
 function adjustTitleFontSize(titleElement) {
   const lineHeight = parseFloat(getComputedStyle(titleElement).lineHeight);
-  const maxHeight = lineHeight * 2; // 2 lines
-  let fontSize = 1.0; // start at 1rem
+  const maxHeight = lineHeight * 2;
+  let fontSize = 1.0;
 
   titleElement.style.fontSize = fontSize + "rem";
 
-  // If already fits, do nothing
   if (titleElement.scrollHeight <= maxHeight) return;
 
-  // Reduce font size until it fits or reaches minimum (0.7rem)
   while (titleElement.scrollHeight > maxHeight && fontSize > 0.7) {
     fontSize -= 0.05;
     titleElement.style.fontSize = fontSize + "rem";
@@ -447,7 +419,7 @@ function rebuildCards(projects, container) {
   projects.forEach((repo) => {
     const card = document.createElement("div");
     card.className = "projects__card";
-    const ogImageUrl = `https://opengraph.githubassets.com/1/parsafaramarzi/${repo.name}`;
+    const ogImageUrl = `https://opengraph.githubassets.com/1/${GITHUB_USERNAME}/${repo.name}`;
     card.innerHTML = `
       <img src="${ogImageUrl}" alt="${repo.name}" class="projects__img" onerror="this.src='https://via.placeholder.com/300x150?text=No+Preview'">
       <h3 class="projects__title"></h3>
@@ -464,6 +436,12 @@ function rebuildCards(projects, container) {
 
     container.appendChild(card);
   });
+
+  // Run ScrollReveal only once, after the first cards are in the DOM
+  if (!projectsRevealed && typeof sr !== "undefined") {
+    sr.reveal(`.projects__card`, { interval: 100, delay: 100 });
+    projectsRevealed = true;
+  }
 }
 
 function updatePaginationButtons(prevBtn, nextBtn, pageIndicator, page, total) {
@@ -472,5 +450,4 @@ function updatePaginationButtons(prevBtn, nextBtn, pageIndicator, page, total) {
   if (nextBtn) nextBtn.disabled = page === total;
 }
 
-// Call the function when the page loads
 document.addEventListener("DOMContentLoaded", fetchAndDisplayProjects);
