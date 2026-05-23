@@ -1,143 +1,85 @@
-/* ==================== BLUR HEADER ==================== */
-const blurHeader = () => {
-  const header = document.getElementById("header");
-  window.scrollY >= 50
-    ? header.classList.add("blur-header")
-    : header.classList.remove("blur-header");
-};
-window.addEventListener("scroll", blurHeader);
+/* ==================== RENDER FUNCTIONS ==================== */
 
-/* ==================== COPY TO CLIPBOARD ==================== */
-function copyEmail(element) {
-  if (!portfolioData) {
-    console.error("Portfolio data not loaded");
-    return;
+function renderHomePortrait(data) {
+  const portrait = document.getElementById("home-portrait");
+  if (portrait && data.personal.portrait) {
+    portrait.src = data.personal.portrait;
+    portrait.alt = data.personal.name;
   }
-
-  navigator.clipboard
-    .writeText(portfolioData.personal.email)
-    .then(() => {
-      const notification = document.createElement("div");
-      notification.className = "copy-notification";
-      notification.innerHTML = `<i class="ri-checkbox-circle-line"></i> Copied`;
-      document.body.appendChild(notification);
-
-      const icon = element.querySelector("i");
-      const originalClass = icon.className;
-      icon.className = "ri-checkbox-circle-line";
-
-      setTimeout(() => {
-        notification.remove();
-        icon.className = originalClass;
-      }, 2000);
-    })
-    .catch((err) => console.error("Failed to copy: ", err));
 }
 
-/* ==================== SCROLL UP ==================== */
-const scrollUp = () => {
-  const scrollUp = document.getElementById("scroll-up");
-  window.scrollY >= 350
-    ? scrollUp.classList.add("show-scroll")
-    : scrollUp.classList.remove("show-scroll");
-};
-window.addEventListener("scroll", scrollUp);
+function renderHomeSocial(data) {
+  const container = document.getElementById("home-social");
+  if (!container) return;
 
-/* ==================== SCROLL ACTIVE LINK ==================== */
-const sections = document.querySelectorAll("section[id]");
-
-const scrollActive = () => {
-  const scrollY = window.pageYOffset;
-
-  sections.forEach((current) => {
-    const sectionHeight = current.offsetHeight;
-    const sectionTop = current.offsetTop - 150;
-    const sectionId = current.getAttribute("id");
-    const sectionsClass = document.querySelector(
-      `.nav__menu a[href*=${sectionId}]`,
-    );
-
-    if (sectionsClass) {
-      if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-        sectionsClass.classList.add("active-link");
-      } else {
-        sectionsClass.classList.remove("active-link");
-      }
-    }
-  });
-
-  if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 5) {
-    const navLinks = document.querySelectorAll(".nav__link");
-    navLinks.forEach((l) => l.classList.remove("active-link"));
-    const contactLink = document.querySelector('.nav__menu a[href*="contact"]');
-    if (contactLink) contactLink.classList.add("active-link");
-  }
-};
-window.addEventListener("scroll", scrollActive);
-
-/* ==================== SCROLL REVEAL ANIMATION ==================== */
-const sr = ScrollReveal({
-  origin: "top",
-  distance: "60px",
-  duration: 1000,
-  delay: 200,
-});
-
-sr.reveal(
-  `.home__data, .home__social, .contact__container, .footer__container`,
-);
-sr.reveal(`.home__handle`, { origin: "bottom" });
-sr.reveal(`.skills__badges`, { origin: "left", duration: 800 });
-sr.reveal(`.about__cards`, { origin: "left", duration: 800 });
-sr.reveal(`.about__data`, { origin: "right", duration: 800 });
-sr.reveal(`.education__card`, { interval: 100, delay: 100 });
-sr.reveal(`.certificates__card`, { interval: 100, delay: 100 });
-
-/* ==================== CERTIFICATE MODAL ==================== */
-const modal = document.getElementById("certModal");
-const modalImage = document.getElementById("modalImage");
-const modalVerifyContainer = document.getElementById("modalVerifyContainer");
-const modalClose = document.querySelector(".modal__close");
-
-function openCertificateModal(imgSrc, verifyLink) {
-  modalImage.src = imgSrc;
-  modalVerifyContainer.innerHTML = "";
-
-  if (verifyLink && verifyLink.trim() !== "") {
-    const verifyBtn = document.createElement("a");
-    verifyBtn.href = verifyLink;
-    verifyBtn.target = "_blank";
-    verifyBtn.rel = "noopener noreferrer";
-    verifyBtn.className = "modal__verify-btn";
-    verifyBtn.textContent = "Verify Certificate";
-    modalVerifyContainer.appendChild(verifyBtn);
-  }
-
-  modal.style.display = "flex";
+  container.innerHTML = `
+    <a
+      href="${data.personal.github}"
+      target="_blank"
+      class="home__social-link"
+      rel="noopener noreferrer"
+    >
+      <i class="ri-github-fill"></i>
+    </a>
+    <a
+      href="${data.personal.linkedin}"
+      target="_blank"
+      class="home__social-link"
+      rel="noopener noreferrer"
+    >
+      <i class="ri-linkedin-box-fill"></i>
+    </a>
+    <button
+      class="home__social-link"
+      onclick="copyEmail(this)"
+      title="Copy Email"
+    >
+      <i class="ri-mail-line"></i>
+    </button>
+  `;
 }
 
-modalClose.addEventListener("click", () => {
-  modal.style.display = "none";
-});
+function renderFooter(data) {
+  const footerTitle = document.getElementById("footer-title");
+  const footerName = document.getElementById("footer-name");
+  const footerSocial = document.getElementById("footer-social");
 
-modal.addEventListener("click", (e) => {
-  if (e.target === modal) {
-    modal.style.display = "none";
+  if (footerTitle) {
+    footerTitle.textContent = data.personal.name.split(" ")[0];
   }
-});
 
-/* ==================== FORMSPREE CONTACT FORM ==================== */
-window.formspree =
-  window.formspree ||
-  function () {
-    (formspree.q = formspree.q || []).push(arguments);
-  };
-formspree("initForm", {
-  formElement: "#contact-form",
-  formId: "mgodgvqe",
-});
+  if (footerName) {
+    footerName.textContent = data.personal.name;
+  }
 
-/* ==================== RENDER FUNCTIONS FOR DYNAMIC CONTENT ==================== */
+  if (footerSocial) {
+    footerSocial.innerHTML = `
+      <a
+        href="${data.personal.github}"
+        class="footer__social-link"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <i class="ri-github-line"></i>
+      </a>
+      <a
+        href="${data.personal.linkedin}"
+        class="footer__social-link"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <i class="ri-linkedin-box-line"></i>
+      </a>
+      <button
+        class="footer__social-link"
+        onclick="copyEmail(this)"
+        title="Click to Copy"
+      >
+        <i class="ri-mail-line"></i>
+      </button>
+    `;
+  }
+}
 
 function renderHomeSection(data) {
   const homeData = document.querySelector(".home__data");
@@ -235,6 +177,98 @@ function renderContactSection(data) {
   }
 }
 
+function updateLearningDuration(data) {
+  if (!data || !data.about) return;
+
+  const startDate = new Date(data.about.learningStartDate);
+  const today = new Date();
+
+  let years = today.getFullYear() - startDate.getFullYear();
+  let months = today.getMonth() - startDate.getMonth();
+
+  if (months < 0) {
+    years--;
+    months += 12;
+  }
+
+  const durationElement = document.getElementById("learning-duration");
+  if (durationElement) {
+    let durationText = "";
+    if (years > 0) {
+      durationText += `${years} Year${years > 1 ? "s" : ""}`;
+      if (months > 0)
+        durationText += `, ${months} Month${months > 1 ? "s" : ""}`;
+    } else if (months > 0) {
+      durationText += `${months} Month${months > 1 ? "s" : ""}`;
+    } else {
+      durationText = "Just Started";
+    }
+    durationElement.textContent = durationText;
+  }
+}
+
+async function renderGitHubRepoCount() {
+  const repoElement = document.getElementById("repo-count");
+  if (!repoElement) return;
+
+  repoElement.textContent = "...";
+  const repoCount = await fetchGitHubRepoCount();
+
+  if (repoCount !== null) {
+    repoElement.textContent = repoCount + "+";
+  } else {
+    repoElement.textContent = "?";
+  }
+}
+
+async function renderTechStack() {
+  const badgesContainer = document.querySelector(".skills__badges");
+  if (!badgesContainer) return;
+
+  badgesContainer.classList.add("loading");
+  badgesContainer.innerHTML = "";
+
+  const badgeUrls = await fetchTechStack();
+
+  if (!badgeUrls) {
+    badgesContainer.innerHTML =
+      "<p>Could not load tech stack. Please try again later.</p>";
+    badgesContainer.classList.remove("loading");
+    return;
+  }
+
+  badgeUrls.forEach((url) => {
+    const img = document.createElement("img");
+    img.src = url;
+    img.alt = "Tech Stack Badge";
+    img.loading = "lazy";
+    badgesContainer.appendChild(img);
+  });
+
+  badgesContainer.classList.remove("loading");
+}
+
+async function renderProjects() {
+  const container = document.getElementById("projects-container");
+  const pageIndicator = document.getElementById("projects-page-indicator");
+
+  if (!container) return;
+
+  container.innerHTML =
+    '<div class="loading-projects">Loading projects from GitHub...</div>';
+
+  const projects = await fetchGitHubProjects();
+
+  if (!projects || projects.length === 0) {
+    container.innerHTML =
+      '<div class="loading-projects">No AI/ML projects found. Check back soon!</div>';
+    if (pageIndicator) pageIndicator.textContent = "Page 0 / 0";
+    return;
+  }
+
+  initializeProjectsPagination(projects);
+}
+
 /* ==================== INITIALIZE APP ==================== */
 async function initializeApp() {
   const data = await loadPortfolioData();
@@ -244,15 +278,19 @@ async function initializeApp() {
   }
 
   renderHomeSection(data);
+  renderHomePortrait(data);
+  renderHomeSocial(data);
   renderAboutSection(data);
   renderEducationSection(data);
   renderCertificatesSection(data);
   renderContactSection(data);
+  renderFooter(data);
 
-  updateLearningDuration();
-  await updateGitHubRepoCount();
-  await fetchAndDisplayTechStack();
-  await fetchAndDisplayProjects();
+  updateLearningDuration(data);
+  await renderGitHubRepoCount();
+  await renderTechStack();
+  await renderProjects();
 }
 
 document.addEventListener("DOMContentLoaded", initializeApp);
+

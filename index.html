@@ -89,36 +89,10 @@
                 d="m82.746 11.895-11.656 11.637 10.453 1.4922c0.60938 0.085937 1.1523 0.44141 1.4766 0.96875 0.32422 0.52344 0.39844 1.1641 0.20312 1.7539l-1.3711 4.1133 6.1523 1.5391c0.81641 0.20703 1.4297 0.88281 1.5547 1.7148 0.12109 0.83203-0.26562 1.6602-0.98828 2.0938l-22.789 13.672 6.875-0.85938c0.95312-0.12109 1.8594 0.42578 2.2031 1.3164 0.34375 0.89453 0.035156 1.9062-0.75 2.457l-20.832 14.582c-0.12891 0.09375-0.26953 0.16406-0.42188 0.22656l-41.668 16.668c-0.89844 0.35938-1.9297 0.046875-2.4844-0.74609-0.55078-0.79688-0.48047-1.8711 0.17188-2.5898l7.6914-8.4844-4.3281-0.54688c-0.71484-0.089844-1.332-0.54688-1.6328-1.2031s-0.23828-1.4219 0.15625-2.0195l2.0078-3.0117h-2.3555c-0.80859 0-1.543-0.46484-1.8867-1.1992s-0.23047-1.5938 0.28906-2.2188l7.5664-9.082h-5.9688c-0.95312 0-1.7812-0.64844-2.0195-1.5703-0.23438-0.92188 0.1875-1.8867 1.0234-2.3438l17.879-9.7539-4.7891-0.95703c-0.88672-0.17969-1.5547-0.90234-1.6602-1.7969-0.10938-0.89453 0.37109-1.7578 1.1914-2.1367l58.355-27.082c0.91797-0.42578 2.0078-0.13281 2.5859 0.69531 0.57812 0.82422 0.47656 1.9531-0.23438 2.668zm-65.277 77.379c-1.0625 0.44531-2.2812-0.054688-2.7266-1.1172-0.44531-1.0625 0.054687-2.2852 1.1172-2.7305l14.582-6.0977c1.0625-0.44531 2.2852 0.054687 2.7305 1.1172 0.44141 1.0625-0.054687 2.2852-1.1172 2.7266zm23.266-14.051c1.0273-0.51562 2.2812-0.097656 2.793 0.92969 0.51562 1.0273 0.097656 2.2812-0.92969 2.793l-4.1641 2.0859c-1.0273 0.51562-2.2852 0.097656-2.7969-0.92969-0.51562-1.0273-0.09375-2.2812 0.93359-2.793zm23.191-64.695c1.0898-0.36328 2.2695 0.22656 2.6367 1.3164 0.35938 1.0938-0.22656 2.2695-1.3203 2.6367l-6.25 2.0859c-1.0898 0.36328-2.2695-0.22656-2.6367-1.3203-0.35938-1.0898 0.22656-2.2695 1.3203-2.6367zm-12.773 4.2812c1.0273-0.51562 2.2812-0.097656 2.793 0.92969 0.51563 1.0273 0.097657 2.2812-0.92969 2.793l-4.1641 2.0859c-1.0273 0.51562-2.2852 0.097656-2.7969-0.92969-0.51563-1.0273-0.097657-2.2852 0.93359-2.7969z"
               />
             </svg>
-            <img
-              src="./assets/img/portrait02.png"
-              alt="Parsa Faramarzi"
-              class="home__img"
-            />
+            <img src="" alt="Portrait" class="home__img" id="home-portrait" />
           </div>
 
-          <div class="home__social">
-            <a
-              href="https://github.com/parsafaramarzi"
-              target="_blank"
-              class="home__social-link"
-            >
-              <i class="ri-github-fill"></i>
-            </a>
-            <a
-              href="https://www.linkedin.com/in/parsafaramarzi/"
-              target="_blank"
-              class="home__social-link"
-            >
-              <i class="ri-linkedin-box-fill"></i>
-            </a>
-            <button
-              class="home__social-link"
-              onclick="copyEmail(this)"
-              title="Copy Email"
-            >
-              <i class="ri-mail-line"></i>
-            </button>
-          </div>
+          <div class="home__social" id="home-social"></div>
 
           <a href="#about" class="home__scroll">
             <i class="ri-arrow-down-line"></i>
@@ -296,7 +270,7 @@
     <!-- ==================== FOOTER ==================== -->
     <footer class="footer">
       <div class="footer__container container">
-        <h1 class="footer__title">Parsa</h1>
+        <h1 class="footer__title" id="footer-title"></h1>
 
         <ul class="footer__list">
           <li><a href="#about" class="footer__link">About</a></li>
@@ -307,32 +281,10 @@
           <li><a href="#contact" class="footer__link">Contact</a></li>
         </ul>
 
-        <ul class="footer__social">
-          <a
-            href="https://github.com/parsafaramarzi"
-            class="footer__social-link"
-            target="_blank"
-          >
-            <i class="ri-github-line"></i>
-          </a>
-          <a
-            href="https://www.linkedin.com/in/parsafaramarzi/"
-            class="footer__social-link"
-            target="_blank"
-          >
-            <i class="ri-linkedin-box-line"></i>
-          </a>
-          <button
-            class="footer__social-link"
-            onclick="copyEmail(this)"
-            title="Click to Copy"
-          >
-            <i class="ri-mail-line"></i>
-          </button>
-        </ul>
+        <ul class="footer__social" id="footer-social"></ul>
 
         <span class="footer__copy"
-          >&#169; Parsa Faramarzi. All rights reserved</span
+          >&#169; <span id="footer-name"></span>. All rights reserved</span
         >
       </div>
     </footer>
@@ -340,6 +292,7 @@
     <!-- ==================== SCRIPTS ==================== -->
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="./assets/js/fetch.js"></script>
+    <script src="./assets/js/ui.js"></script>
     <script src="./assets/js/main.js"></script>
     <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
   </body>

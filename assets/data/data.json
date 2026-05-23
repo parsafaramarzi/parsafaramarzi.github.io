@@ -6,9 +6,7 @@
     "email": "pfaramazi@gmail.com",
     "cvUrl": "./assets/CV/Parsa Faramarzi CV General.pdf",
     "cvFileName": "Parsa_Faramarzi_CV.pdf",
-    "portrait": "./assets/img/portrait02.png"
-  },
-  "social": {
+    "portrait": "./assets/img/portrait02.png",
     "github": "https://github.com/parsafaramarzi",
     "linkedin": "https://www.linkedin.com/in/parsafaramarzi/"
   },
