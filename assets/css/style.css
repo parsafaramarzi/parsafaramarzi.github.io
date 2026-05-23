@@ -37,6 +37,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -44,6 +45,7 @@ body {
   background-color: var(--body-color);
   color: var(--text-color);
   line-height: 1.7;
+  overflow-x: hidden;
 }
 
 ul {
@@ -167,6 +169,16 @@ img {
 @media screen and (max-width: 380px) {
   .section {
     padding-block: 5rem 3rem;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .container {
+    padding: 0 1rem;
+  }
+
+  .section {
+    padding-block: 4rem 2.5rem;
   }
 }
 
@@ -540,6 +552,36 @@ img {
   .home__education {
     font-size: 1.1rem;
   }
+
+  .home__buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .home__buttons .button {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .home__handle {
+    width: 195px;
+    height: 225px;
+  }
+
+  .home__name {
+    font-size: 2rem;
+  }
+
+  .home__greeting {
+    font-size: 1.1rem;
+  }
+
+  .home__education {
+    font-size: 0.95rem;
+    margin-bottom: 1.8rem;
+  }
 }
 
 /* ==================== ABOUT SECTION ==================== */
@@ -624,11 +666,21 @@ img {
     grid-template-columns: 1fr;
     justify-items: center;
   }
+
+  .about__box {
+    aspect-ratio: unset;
+    min-height: 130px;
+    width: min(260px, 100%);
+  }
 }
 
 @media screen and (max-width: 576px) {
   .about__info {
     grid-template-columns: 1fr;
+  }
+
+  .about__description {
+    text-align: left;
   }
 }
 
@@ -925,6 +977,10 @@ img {
   .education__card {
     padding: 1.5rem;
   }
+
+  .education__description {
+    text-align: left;
+  }
 }
 
 @media screen and (max-width: 380px) {
@@ -1139,6 +1195,11 @@ img {
   .contact__container {
     grid-template-columns: 1fr;
   }
+
+  .contact__card {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 /* ==================== CERTIFICATE MODAL ==================== */
@@ -1228,25 +1289,6 @@ img {
   margin-bottom: 2rem;
 }
 
-.footer__list {
-  display: flex;
-  justify-content: center;
-  gap: 2.5rem;
-  margin-bottom: 2.5rem;
-  padding-inline-start: 0px;
-}
-
-.footer__link {
-  color: var(--text-color);
-  transition:
-    color 0.3s,
-    transform 0.3s;
-}
-
-.footer__link:hover {
-  color: var(--first-color);
-  translate: 0 -5px;
-}
 
 .footer__social {
   display: flex;
@@ -1276,6 +1318,29 @@ img {
   display: block;
   font-size: var(--small-font-size);
   margin-top: 3rem;
+}
+
+@media screen and (max-width: 768px) {
+  .footer__title {
+    font-size: 1.8rem;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .footer__title {
+    font-size: 1.6rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .footer__copy {
+    margin-top: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .footer__title {
+    font-size: 1.4rem;
+  }
 }
 
 /* ==================== SCROLL UP BUTTON ==================== */
