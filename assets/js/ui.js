@@ -1,6 +1,7 @@
 /* ==================== BLUR HEADER ==================== */
 const blurHeader = () => {
   const header = document.getElementById("header");
+  if (!header) return;
   window.scrollY >= 50
     ? header.classList.add("blur-header")
     : header.classList.remove("blur-header");
@@ -10,6 +11,7 @@ window.addEventListener("scroll", blurHeader);
 /* ==================== SCROLL UP ==================== */
 const scrollUp = () => {
   const scrollUp = document.getElementById("scroll-up");
+  if (!scrollUp) return;
   window.scrollY >= 350
     ? scrollUp.classList.add("show-scroll")
     : scrollUp.classList.remove("show-scroll");
@@ -27,7 +29,7 @@ const scrollActive = () => {
     const sectionTop = current.offsetTop - 150;
     const sectionId = current.getAttribute("id");
     const sectionsClass = document.querySelector(
-      `.nav__menu a[href*=${sectionId}]`,
+      `.nav__menu a[href*="${sectionId}"]`,
     );
 
     if (sectionsClass) {
@@ -89,9 +91,11 @@ function openCertificateModal(imgSrc, verifyLink) {
   modal.style.display = "flex";
 }
 
-modalClose.addEventListener("click", () => {
-  modal.style.display = "none";
-});
+if (modalClose) {
+  modalClose.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
+}
 
 modal.addEventListener("click", (e) => {
   if (e.target === modal) {
@@ -115,12 +119,12 @@ function copyEmail(element) {
       document.body.appendChild(notification);
 
       const icon = element.querySelector("i");
-      const originalClass = icon.className;
-      icon.className = "ri-checkbox-circle-line";
+      const originalClass = icon ? icon.className : null;
+      if (icon) icon.className = "ri-checkbox-circle-line";
 
       setTimeout(() => {
         notification.remove();
-        icon.className = originalClass;
+        if (icon && originalClass) icon.className = originalClass;
       }, 2000);
     })
     .catch((err) => console.error("Failed to copy: ", err));
@@ -236,21 +240,35 @@ function rebuildCards(projects, container) {
   projects.forEach((repo) => {
     const card = document.createElement("div");
     card.className = "projects__card";
-    const imgUrl = repo.socialImage || `https://opengraph.githubassets.com/1/${portfolioData.github.username}/${repo.name}`;
-    card.innerHTML = `
-      <img src="${imgUrl}" alt="${repo.name}" class="projects__img" onerror="this.src='https://via.placeholder.com/300x150?text=No+Preview'">
-      <h3 class="projects__title"></h3>
-      <a href="${repo.html_url}" class="projects__button" target="_blank" rel="noopener noreferrer">
-        View Project <i class="ri-arrow-right-line"></i>
-      </a>
-    `;
 
-    const titleEl = card.querySelector(".projects__title");
-    if (titleEl) {
-      titleEl.textContent = repo.name.replace(/-/g, " ");
-      adjustTitleFontSize(titleEl);
-    }
+    const fallbackUrl = `https://opengraph.githubassets.com/1/${portfolioData.github.username}/${repo.name}`;
+    const img = document.createElement("img");
+    img.src = repo.previewImage || fallbackUrl;
+    img.alt = repo.name;
+    img.className = "projects__img";
+    img.onerror = function () {
+      if (this.src !== fallbackUrl) this.src = fallbackUrl;
+    };
 
+    const titleEl = document.createElement("h3");
+    titleEl.className = "projects__title";
+    titleEl.textContent = repo.name.replace(/-/g, " ");
+
+    const link = document.createElement("a");
+    link.href = repo.html_url;
+    link.className = "projects__button";
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.appendChild(document.createTextNode("View Project "));
+    const icon = document.createElement("i");
+    icon.className = "ri-arrow-right-line";
+    link.appendChild(icon);
+
+    card.appendChild(img);
+    card.appendChild(titleEl);
+    card.appendChild(link);
+
+    adjustTitleFontSize(titleEl);
     container.appendChild(card);
   });
 

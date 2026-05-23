@@ -105,15 +105,13 @@ async function fetchProjectPreviewImage(username, repoName, defaultBranch) {
       const response = await fetch(imageUrl, { method: "HEAD" });
 
       if (response.ok) {
-        console.log(`✓ Found preview image for ${repoName}: ${fileName}`);
         return imageUrl;
       }
     } catch (error) {
-      console.log(`✗ preview.${fileName.split('.')[1]} not found for ${repoName}`);
+      // file not found or network error, try next
     }
   }
 
-  console.warn(`✗ No preview image found for ${repoName}, using default`);
   return null;
 }
 
@@ -136,7 +134,6 @@ async function fetchGitHubProjects() {
       );
     });
 
-    console.log(`Fetching preview images for ${filteredProjects.length} projects...`);
     for (let project of filteredProjects) {
       project.previewImage = await fetchProjectPreviewImage(
         portfolioData.github.username,
